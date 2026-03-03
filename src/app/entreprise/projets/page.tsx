@@ -12,11 +12,11 @@ import { Search, ArrowRight, Plus, MapPin, Maximize2, Users, Euro } from "lucide
 
 const STATUT_COLORS: Record<string, string> = {
   en_attente: "bg-slate-100 text-slate-600 border-slate-200",
-  espaces_proposes: "bg-blue-100 text-blue-700 border-blue-200",
+  espaces_proposes: "bg-blue-100 text-[#1C1F25] border-[#A9BCB7]/40",
   selection_faite: "bg-indigo-100 text-indigo-700 border-indigo-200",
   visite_planifiee: "bg-yellow-100 text-yellow-700 border-yellow-200",
   visite_effectuee: "bg-orange-100 text-orange-700 border-orange-200",
-  loi_envoyee: "bg-amber-100 text-amber-700 border-amber-200",
+  loi_envoyee: "bg-amber-100 text-[#c4607a] border-[#E590A1]/30",
   projet_contrat: "bg-purple-100 text-purple-700 border-purple-200",
   contrat_signe: "bg-green-100 text-green-700 border-green-200",
 };
@@ -28,13 +28,13 @@ export default function ProjetsEntreprisePage() {
     <div className="max-w-5xl space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-[#1a3a5c]">Mes recherches & projets</h1>
+          <h1 className="text-2xl font-bold text-[#1C1F25]">Mes recherches & projets</h1>
           <p className="text-slate-500 mt-1">
             Suivez l'avancement de chaque dossier de recherche.
           </p>
         </div>
         <Link href="/entreprise/cahier-des-charges">
-          <Button className="bg-[#1a3a5c] hover:bg-[#0f2540] text-white gap-2">
+          <Button className="bg-[#1C1F25] hover:bg-[#111318] text-white gap-2">
             <Plus className="w-4 h-4" />
             Nouvelle recherche
           </Button>
@@ -47,7 +47,7 @@ export default function ProjetsEntreprisePage() {
             <Search className="w-12 h-12 text-slate-200 mx-auto mb-4" />
             <p className="text-slate-500 mb-4">Vous n'avez pas encore de recherche active.</p>
             <Link href="/entreprise/cahier-des-charges">
-              <Button className="bg-[#1a3a5c] hover:bg-[#0f2540] text-white">
+              <Button className="bg-[#1C1F25] hover:bg-[#111318] text-white">
                 Démarrer ma première recherche
               </Button>
             </Link>
@@ -71,11 +71,11 @@ export default function ProjetsEntreprisePage() {
                 <CardContent className="p-6">
                   <div className="flex flex-col md:flex-row md:items-start justify-between gap-4">
                     <div className="flex items-start gap-4">
-                      <div className="w-12 h-12 bg-amber-50 rounded-xl flex items-center justify-center flex-shrink-0">
-                        <Search className="w-6 h-6 text-amber-600" />
+                      <div className="w-12 h-12 bg-[#fdf0f3] rounded-xl flex items-center justify-center flex-shrink-0">
+                        <Search className="w-6 h-6 text-[#E590A1]" />
                       </div>
                       <div>
-                        <h3 className="font-bold text-[#1a3a5c] text-lg">{projet.nom}</h3>
+                        <h3 className="font-bold text-[#1C1F25] text-lg">{projet.nom}</h3>
                         <div className="flex flex-wrap gap-x-4 gap-y-1 mt-1">
                           <span className="text-xs text-slate-500 flex items-center gap-1">
                             <MapPin className="w-3 h-3" />
@@ -106,13 +106,13 @@ export default function ProjetsEntreprisePage() {
                     <div className="flex items-center gap-3 flex-shrink-0">
                       <div className="text-center">
                         <p className="text-xs text-slate-400 mb-1">Espaces reçus</p>
-                        <p className="text-lg font-bold text-[#1a3a5c]">
+                        <p className="text-lg font-bold text-[#1C1F25]">
                           {projet.espacesProposes.length}
                         </p>
                       </div>
                       <div className="text-center">
                         <p className="text-xs text-slate-400 mb-1">Sélectionnés</p>
-                        <p className="text-lg font-bold text-amber-600">
+                        <p className="text-lg font-bold text-[#E590A1]">
                           {projet.espacesSelectionnes.length}
                         </p>
                       </div>
@@ -139,7 +139,7 @@ export default function ProjetsEntreprisePage() {
                     </div>
                     <div className="h-1.5 bg-slate-100 rounded-full overflow-hidden">
                       <div
-                        className="h-full bg-amber-500 rounded-full transition-all"
+                        className="h-full bg-[#E590A1] rounded-full transition-all"
                         style={{ width: `${progress}%` }}
                       />
                     </div>

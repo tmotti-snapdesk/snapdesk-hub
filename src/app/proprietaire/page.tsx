@@ -14,7 +14,7 @@ import {
 import { Building2, Plus, TrendingUp, FileText, Eye, ArrowRight } from "lucide-react";
 
 const STATUT_COLORS: Record<string, string> = {
-  receptionne: "bg-blue-100 text-blue-700",
+  receptionne: "bg-blue-100 text-[#1C1F25]",
   visite_planifiee: "bg-yellow-100 text-yellow-700",
   visite_effectuee: "bg-orange-100 text-orange-700",
   en_discussion: "bg-purple-100 text-purple-700",
@@ -36,8 +36,8 @@ export default function ProprietaireDashboard() {
       label: "Espaces soumis",
       value: espaces.length,
       icon: Building2,
-      color: "text-blue-600",
-      bg: "bg-blue-50",
+      color: "text-[#1C1F25]",
+      bg: "bg-[#eef3f2]",
     },
     {
       label: "Contrats signés",
@@ -69,7 +69,7 @@ export default function ProprietaireDashboard() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-[#1a3a5c]">
+          <h1 className="text-2xl font-bold text-[#1C1F25]">
             Bonjour, {user?.name?.split(" ")[0]} 👋
           </h1>
           <p className="text-slate-500 mt-1">
@@ -77,7 +77,7 @@ export default function ProprietaireDashboard() {
           </p>
         </div>
         <Link href="/proprietaire/nouvel-espace">
-          <Button className="bg-[#1a3a5c] hover:bg-[#0f2540] text-white gap-2">
+          <Button className="bg-[#1C1F25] hover:bg-[#111318] text-white gap-2">
             <Plus className="w-4 h-4" />
             Soumettre un espace
           </Button>
@@ -94,7 +94,7 @@ export default function ProprietaireDashboard() {
                 <div className={`w-10 h-10 rounded-lg ${stat.bg} flex items-center justify-center mb-3`}>
                   <Icon className={`w-5 h-5 ${stat.color}`} />
                 </div>
-                <p className="text-2xl font-bold text-[#1a3a5c]">{stat.value}</p>
+                <p className="text-2xl font-bold text-[#1C1F25]">{stat.value}</p>
                 <p className="text-xs text-slate-500 mt-0.5">{stat.label}</p>
               </CardContent>
             </Card>
@@ -105,11 +105,11 @@ export default function ProprietaireDashboard() {
       {/* Projets */}
       <Card className="border-0 shadow-sm">
         <CardHeader className="flex flex-row items-center justify-between pb-4">
-          <CardTitle className="text-lg font-semibold text-[#1a3a5c]">
+          <CardTitle className="text-lg font-semibold text-[#1C1F25]">
             Mes espaces & projets
           </CardTitle>
           <Link href="/proprietaire/projets">
-            <Button variant="ghost" size="sm" className="text-[#1a3a5c] gap-1">
+            <Button variant="ghost" size="sm" className="text-[#1C1F25] gap-1">
               Voir tout <ArrowRight className="w-3 h-3" />
             </Button>
           </Link>
@@ -117,13 +117,13 @@ export default function ProprietaireDashboard() {
         <CardContent className="space-y-3">
           {espaces.map((espace) => (
             <Link key={espace.id} href={`/proprietaire/projets/${espace.id}`}>
-              <div className="flex items-center justify-between p-4 rounded-xl border border-slate-100 hover:border-[#1a3a5c]/30 hover:bg-blue-50/40 transition-all cursor-pointer">
+              <div className="flex items-center justify-between p-4 rounded-xl border border-slate-100 hover:border-[#1C1F25]/30 hover:bg-[#eef3f2]/40 transition-all cursor-pointer">
                 <div className="flex items-center gap-4">
-                  <div className="w-10 h-10 bg-[#1a3a5c]/10 rounded-lg flex items-center justify-center">
-                    <Building2 className="w-5 h-5 text-[#1a3a5c]" />
+                  <div className="w-10 h-10 bg-[#1C1F25]/10 rounded-lg flex items-center justify-center">
+                    <Building2 className="w-5 h-5 text-[#1C1F25]" />
                   </div>
                   <div>
-                    <p className="font-semibold text-[#1a3a5c] text-sm">{espace.nom}</p>
+                    <p className="font-semibold text-[#1C1F25] text-sm">{espace.nom}</p>
                     <p className="text-xs text-slate-500">
                       {espace.ville} — {espace.superficie} m² — {espace.capacite} postes
                     </p>
@@ -148,7 +148,7 @@ export default function ProprietaireDashboard() {
               <Building2 className="w-12 h-12 mx-auto mb-3 opacity-30" />
               <p>Aucun espace soumis pour le moment.</p>
               <Link href="/proprietaire/nouvel-espace">
-                <Button variant="outline" className="mt-3 text-[#1a3a5c]">
+                <Button variant="outline" className="mt-3 text-[#1C1F25]">
                   Soumettre mon premier espace
                 </Button>
               </Link>
@@ -158,16 +158,16 @@ export default function ProprietaireDashboard() {
       </Card>
 
       {/* CTA Présentation */}
-      <Card className="border-0 shadow-sm bg-gradient-to-r from-[#1a3a5c] to-[#2563eb] text-white">
+      <Card className="border-0 shadow-sm bg-gradient-to-r from-[#1C1F25] to-[#A9BCB7] text-white">
         <CardContent className="p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div>
             <p className="font-semibold text-lg">Découvrez notre modèle de gestion</p>
-            <p className="text-blue-100 text-sm mt-1">
+            <p className="text-white/60 text-sm mt-1">
               Comment Snapdesk valorise vos espaces et maximise vos revenus locatifs.
             </p>
           </div>
           <Link href="/proprietaire/presentation">
-            <Button variant="secondary" className="whitespace-nowrap bg-white text-[#1a3a5c] hover:bg-blue-50">
+            <Button variant="secondary" className="whitespace-nowrap bg-white text-[#1C1F25] hover:bg-[#eef3f2]">
               En savoir plus →
             </Button>
           </Link>

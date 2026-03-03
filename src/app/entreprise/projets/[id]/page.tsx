@@ -29,11 +29,11 @@ import {
 
 const STATUT_COLORS: Record<string, string> = {
   en_attente: "bg-slate-100 text-slate-600",
-  espaces_proposes: "bg-blue-100 text-blue-700",
+  espaces_proposes: "bg-blue-100 text-[#1C1F25]",
   selection_faite: "bg-indigo-100 text-indigo-700",
   visite_planifiee: "bg-yellow-100 text-yellow-700",
   visite_effectuee: "bg-orange-100 text-orange-700",
-  loi_envoyee: "bg-amber-100 text-amber-700",
+  loi_envoyee: "bg-amber-100 text-[#c4607a]",
   projet_contrat: "bg-purple-100 text-purple-700",
   contrat_signe: "bg-green-100 text-green-700",
 };
@@ -72,7 +72,7 @@ export default function ProjetEntrepriseDetailPage({
     <div className="max-w-5xl space-y-6">
       <Link
         href="/entreprise/projets"
-        className="flex items-center gap-1 text-sm text-slate-500 hover:text-[#1a3a5c] transition-colors"
+        className="flex items-center gap-1 text-sm text-slate-500 hover:text-[#1C1F25] transition-colors"
       >
         <ArrowLeft className="w-4 h-4" />
         Retour aux projets
@@ -81,7 +81,7 @@ export default function ProjetEntrepriseDetailPage({
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-[#1a3a5c]">{projet.nom}</h1>
+          <h1 className="text-2xl font-bold text-[#1C1F25]">{projet.nom}</h1>
           <p className="text-slate-500 text-sm mt-1 flex items-center gap-1">
             <MapPin className="w-3.5 h-3.5" />
             {cdc.ville} — Créé le{" "}
@@ -100,7 +100,7 @@ export default function ProjetEntrepriseDetailPage({
       {/* Timeline */}
       <Card className="border-0 shadow-sm">
         <CardHeader>
-          <CardTitle className="text-base font-semibold text-[#1a3a5c]">
+          <CardTitle className="text-base font-semibold text-[#1C1F25]">
             Avancement de votre dossier
           </CardTitle>
         </CardHeader>
@@ -115,7 +115,7 @@ export default function ProjetEntrepriseDetailPage({
         {/* Cahier des charges */}
         <Card className="border-0 shadow-sm">
           <CardHeader>
-            <CardTitle className="text-base text-[#1a3a5c] flex items-center gap-2">
+            <CardTitle className="text-base text-[#1C1F25] flex items-center gap-2">
               <FileText className="w-4 h-4" />
               Cahier des charges
             </CardTitle>
@@ -141,11 +141,11 @@ export default function ProjetEntrepriseDetailPage({
               return (
                 <div key={item.label} className="flex items-center gap-3">
                   <div className="w-8 h-8 bg-slate-50 rounded-lg flex items-center justify-center">
-                    <Icon className="w-4 h-4 text-[#1a3a5c]" />
+                    <Icon className="w-4 h-4 text-[#1C1F25]" />
                   </div>
                   <div>
                     <p className="text-xs text-slate-400">{item.label}</p>
-                    <p className="text-sm font-medium text-[#1a3a5c]">{item.value}</p>
+                    <p className="text-sm font-medium text-[#1C1F25]">{item.value}</p>
                   </div>
                 </div>
               );
@@ -156,7 +156,7 @@ export default function ProjetEntrepriseDetailPage({
                 <p className="text-xs text-slate-400 mb-2">Services souhaités</p>
                 <div className="flex flex-wrap gap-1.5">
                   {cdc.amenagements.map((a) => (
-                    <span key={a} className="text-xs px-2.5 py-1 bg-blue-50 text-[#1a3a5c] rounded-full">
+                    <span key={a} className="text-xs px-2.5 py-1 bg-[#eef3f2] text-[#1C1F25] rounded-full">
                       {a}
                     </span>
                   ))}
@@ -177,7 +177,7 @@ export default function ProjetEntrepriseDetailPage({
         <div className="space-y-4">
           <Card className="border-0 shadow-sm">
             <CardHeader>
-              <CardTitle className="text-base text-[#1a3a5c] flex items-center gap-2">
+              <CardTitle className="text-base text-[#1C1F25] flex items-center gap-2">
                 <Clock className="w-4 h-4" />
                 Prochaines étapes
               </CardTitle>
@@ -250,11 +250,11 @@ export default function ProjetEntrepriseDetailPage({
           </Card>
 
           <Link href="/entreprise/rendez-vous">
-            <Card className="border border-[#1a3a5c]/20 shadow-sm hover:shadow-md transition-shadow cursor-pointer bg-gradient-to-br from-blue-50 to-indigo-50">
+            <Card className="border border-[#1C1F25]/20 shadow-sm hover:shadow-md transition-shadow cursor-pointer bg-gradient-to-br from-blue-50 to-indigo-50">
               <CardContent className="p-4 flex items-center gap-3">
-                <MessageSquare className="w-8 h-8 text-[#1a3a5c]" />
+                <MessageSquare className="w-8 h-8 text-[#1C1F25]" />
                 <div>
-                  <p className="font-semibold text-[#1a3a5c] text-sm">Contacter un expert</p>
+                  <p className="font-semibold text-[#1C1F25] text-sm">Contacter un expert</p>
                   <p className="text-xs text-slate-500">Prendre rendez-vous avec l'équipe Snapdesk</p>
                 </div>
               </CardContent>
@@ -267,22 +267,22 @@ export default function ProjetEntrepriseDetailPage({
       {espacesSelectionnesDetails.length > 0 && (
         <div>
           <div className="flex items-center gap-2 mb-4">
-            <Star className="w-5 h-5 text-amber-500 fill-amber-500" />
-            <h2 className="text-xl font-bold text-[#1a3a5c]">
+            <Star className="w-5 h-5 text-[#E590A1] fill-[#E590A1]" />
+            <h2 className="text-xl font-bold text-[#1C1F25]">
               Espaces sélectionnés ({espacesSelectionnesDetails.length})
             </h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {espacesSelectionnesDetails.map((espace) => (
-              <Card key={espace.id} className="border border-amber-200 shadow-sm">
+              <Card key={espace.id} className="border border-[#E590A1]/30 shadow-sm">
                 <CardContent className="p-5">
                   <div className="flex items-start gap-3">
                     <div className="w-12 h-12 bg-gradient-to-br from-slate-100 to-slate-200 rounded-lg flex items-center justify-center flex-shrink-0">
                       <Building2 className="w-6 h-6 text-slate-400" />
                     </div>
                     <div className="flex-1">
-                      <h3 className="font-bold text-[#1a3a5c]">{espace.nom}</h3>
+                      <h3 className="font-bold text-[#1C1F25]">{espace.nom}</h3>
                       <p className="text-xs text-slate-500 flex items-center gap-1 mt-0.5">
                         <MapPin className="w-3 h-3" />
                         {espace.adresse}, {espace.ville}
@@ -299,7 +299,7 @@ export default function ProjetEntrepriseDetailPage({
 
                   <div className="mt-3 flex flex-wrap gap-1.5">
                     {espace.amenagements.slice(0, 3).map((a) => (
-                      <span key={a} className="text-[10px] px-2 py-0.5 bg-amber-50 text-amber-700 rounded-full">
+                      <span key={a} className="text-[10px] px-2 py-0.5 bg-[#fdf0f3] text-[#c4607a] rounded-full">
                         {a}
                       </span>
                     ))}

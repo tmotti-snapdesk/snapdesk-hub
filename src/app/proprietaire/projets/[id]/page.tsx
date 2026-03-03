@@ -54,7 +54,7 @@ export default function ProjetDetailPage({
       {/* Back */}
       <Link
         href="/proprietaire/projets"
-        className="flex items-center gap-1 text-sm text-slate-500 hover:text-[#1a3a5c] transition-colors"
+        className="flex items-center gap-1 text-sm text-slate-500 hover:text-[#1C1F25] transition-colors"
       >
         <ArrowLeft className="w-4 h-4" />
         Retour aux projets
@@ -63,11 +63,11 @@ export default function ProjetDetailPage({
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
         <div className="flex items-start gap-4">
-          <div className="w-14 h-14 bg-[#1a3a5c]/10 rounded-xl flex items-center justify-center flex-shrink-0">
-            <Building2 className="w-7 h-7 text-[#1a3a5c]" />
+          <div className="w-14 h-14 bg-[#1C1F25]/10 rounded-xl flex items-center justify-center flex-shrink-0">
+            <Building2 className="w-7 h-7 text-[#1C1F25]" />
           </div>
           <div>
-            <h1 className="text-2xl font-bold text-[#1a3a5c]">{espace.nom}</h1>
+            <h1 className="text-2xl font-bold text-[#1C1F25]">{espace.nom}</h1>
             <p className="text-slate-500 mt-0.5 flex items-center gap-1">
               <MapPin className="w-3.5 h-3.5" />
               {espace.adresse}, {espace.ville}
@@ -82,7 +82,7 @@ export default function ProjetDetailPage({
       {/* Timeline */}
       <Card className="border-0 shadow-sm">
         <CardHeader>
-          <CardTitle className="text-base font-semibold text-[#1a3a5c] flex items-center gap-2">
+          <CardTitle className="text-base font-semibold text-[#1C1F25] flex items-center gap-2">
             <TrendingUp className="w-4 h-4" />
             Avancement du projet
           </CardTitle>
@@ -96,7 +96,7 @@ export default function ProjetDetailPage({
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <Card className="border-0 shadow-sm">
           <CardContent className="p-5 space-y-3">
-            <h3 className="font-semibold text-[#1a3a5c] text-sm uppercase tracking-wider">
+            <h3 className="font-semibold text-[#1C1F25] text-sm uppercase tracking-wider">
               Caractéristiques
             </h3>
             {[
@@ -107,12 +107,12 @@ export default function ProjetDetailPage({
               const Icon = item.icon;
               return (
                 <div key={item.label} className="flex items-center gap-3">
-                  <div className="w-8 h-8 bg-blue-50 rounded-lg flex items-center justify-center">
-                    <Icon className="w-4 h-4 text-[#1a3a5c]" />
+                  <div className="w-8 h-8 bg-[#eef3f2] rounded-lg flex items-center justify-center">
+                    <Icon className="w-4 h-4 text-[#1C1F25]" />
                   </div>
                   <div>
                     <p className="text-xs text-slate-400">{item.label}</p>
-                    <p className="text-sm font-medium text-[#1a3a5c]">{item.value}</p>
+                    <p className="text-sm font-medium text-[#1C1F25]">{item.value}</p>
                   </div>
                 </div>
               );
@@ -122,7 +122,7 @@ export default function ProjetDetailPage({
 
         <Card className="border-0 shadow-sm">
           <CardContent className="p-5 space-y-3">
-            <h3 className="font-semibold text-[#1a3a5c] text-sm uppercase tracking-wider">
+            <h3 className="font-semibold text-[#1C1F25] text-sm uppercase tracking-wider">
               Financier
             </h3>
             {[
@@ -145,12 +145,12 @@ export default function ProjetDetailPage({
               const Icon = item.icon;
               return (
                 <div key={item.label} className="flex items-center gap-3">
-                  <div className="w-8 h-8 bg-blue-50 rounded-lg flex items-center justify-center">
-                    <Icon className="w-4 h-4 text-[#1a3a5c]" />
+                  <div className="w-8 h-8 bg-[#eef3f2] rounded-lg flex items-center justify-center">
+                    <Icon className="w-4 h-4 text-[#1C1F25]" />
                   </div>
                   <div>
                     <p className="text-xs text-slate-400">{item.label}</p>
-                    <p className="text-sm font-medium text-[#1a3a5c]">{item.value}</p>
+                    <p className="text-sm font-medium text-[#1C1F25]">{item.value}</p>
                   </div>
                 </div>
               );
@@ -160,17 +160,17 @@ export default function ProjetDetailPage({
 
         <Card className="border-0 shadow-sm">
           <CardContent className="p-5">
-            <h3 className="font-semibold text-[#1a3a5c] text-sm uppercase tracking-wider mb-3">
+            <h3 className="font-semibold text-[#1C1F25] text-sm uppercase tracking-wider mb-3">
               Description
             </h3>
             <p className="text-sm text-slate-600 leading-relaxed">{espace.description}</p>
             {espace.notes && (
-              <div className="mt-3 p-3 bg-amber-50 rounded-lg border border-amber-100">
-                <p className="text-xs font-semibold text-amber-700 mb-1 flex items-center gap-1">
+              <div className="mt-3 p-3 bg-[#fdf0f3] rounded-lg border border-amber-100">
+                <p className="text-xs font-semibold text-[#c4607a] mb-1 flex items-center gap-1">
                   <MessageSquare className="w-3 h-3" />
                   Note Snapdesk
                 </p>
-                <p className="text-xs text-amber-600">{espace.notes}</p>
+                <p className="text-xs text-[#E590A1]">{espace.notes}</p>
               </div>
             )}
           </CardContent>
@@ -181,8 +181,8 @@ export default function ProjetDetailPage({
       {espace.rapports.length > 0 && (
         <div>
           <div className="flex items-center gap-2 mb-4">
-            <FileText className="w-5 h-5 text-[#1a3a5c]" />
-            <h2 className="text-xl font-bold text-[#1a3a5c]">
+            <FileText className="w-5 h-5 text-[#1C1F25]" />
+            <h2 className="text-xl font-bold text-[#1C1F25]">
               Rapports de commercialisation
             </h2>
           </div>
@@ -190,14 +190,14 @@ export default function ProjetDetailPage({
             {espace.rapports.map((rapport) => (
               <Card key={rapport.mois} className="border border-slate-100 shadow-sm">
                 <CardHeader className="pb-3">
-                  <CardTitle className="text-base font-semibold text-[#1a3a5c]">
+                  <CardTitle className="text-base font-semibold text-[#1C1F25]">
                     {rapport.mois}
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="grid grid-cols-3 gap-3 text-center">
-                    <div className="bg-blue-50 rounded-lg p-3">
-                      <p className="text-xl font-bold text-[#1a3a5c]">{rapport.visites}</p>
+                    <div className="bg-[#eef3f2] rounded-lg p-3">
+                      <p className="text-xl font-bold text-[#1C1F25]">{rapport.visites}</p>
                       <p className="text-xs text-slate-500">Visites</p>
                     </div>
                     <div className="bg-purple-50 rounded-lg p-3">

@@ -84,7 +84,7 @@ export default function NouvelEspacePage() {
         <Card className="max-w-md w-full border-0 shadow-lg text-center">
           <CardContent className="p-10">
             <CheckCircle2 className="w-16 h-16 text-green-500 mx-auto mb-5" />
-            <h2 className="text-2xl font-bold text-[#1a3a5c] mb-2">Espace soumis !</h2>
+            <h2 className="text-2xl font-bold text-[#1C1F25] mb-2">Espace soumis !</h2>
             <p className="text-slate-600 mb-1">
               Votre espace <strong>{form.nom || "sans nom"}</strong> a bien été enregistré.
             </p>
@@ -102,7 +102,7 @@ export default function NouvelEspacePage() {
     <div className="max-w-3xl mx-auto space-y-6">
       {/* Header */}
       <div>
-        <h1 className="text-2xl font-bold text-[#1a3a5c]">Soumettre un espace</h1>
+        <h1 className="text-2xl font-bold text-[#1C1F25]">Soumettre un espace</h1>
         <p className="text-slate-500 mt-1">
           Renseignez les informations de votre espace pour que notre équipe puisse l'étudier.
         </p>
@@ -114,12 +114,12 @@ export default function NouvelEspacePage() {
           <div key={s.num} className="flex-1">
             <div
               className={`h-1.5 rounded-full transition-all ${
-                step >= s.num ? "bg-[#1a3a5c]" : "bg-slate-200"
+                step >= s.num ? "bg-[#1C1F25]" : "bg-slate-200"
               }`}
             />
             <p
               className={`text-xs mt-1.5 font-medium ${
-                step >= s.num ? "text-[#1a3a5c]" : "text-slate-400"
+                step >= s.num ? "text-[#1C1F25]" : "text-slate-400"
               }`}
             >
               {s.label}
@@ -130,7 +130,7 @@ export default function NouvelEspacePage() {
 
       <Card className="border-0 shadow-sm">
         <CardHeader>
-          <CardTitle className="text-lg font-semibold text-[#1a3a5c]">
+          <CardTitle className="text-lg font-semibold text-[#1C1F25]">
             {STEPS[step - 1].label}
           </CardTitle>
         </CardHeader>
@@ -217,7 +217,7 @@ export default function NouvelEspacePage() {
                       onClick={() => update("typeEspace", type)}
                       className={`p-3 rounded-lg border text-sm text-left transition-all ${
                         form.typeEspace === type
-                          ? "border-[#1a3a5c] bg-blue-50 text-[#1a3a5c] font-medium"
+                          ? "border-[#1C1F25] bg-[#eef3f2] text-[#1C1F25] font-medium"
                           : "border-slate-200 text-slate-600 hover:border-slate-300"
                       }`}
                     >
@@ -236,7 +236,7 @@ export default function NouvelEspacePage() {
                         type="checkbox"
                         checked={form.amenagements.includes(item)}
                         onChange={() => toggleAmenagement(item)}
-                        className="rounded border-slate-300 text-[#1a3a5c]"
+                        className="rounded border-slate-300 text-[#1C1F25]"
                       />
                       <span className="text-sm text-slate-600">{item}</span>
                     </label>
@@ -277,11 +277,11 @@ export default function NouvelEspacePage() {
                   onChange={(e) => update("disponibilite", e.target.value)}
                 />
               </div>
-              <div className="p-4 bg-blue-50 rounded-lg border border-blue-100">
-                <p className="text-xs text-blue-700 font-semibold mb-1">
+              <div className="p-4 bg-[#eef3f2] rounded-lg border border-[#A9BCB7]/30">
+                <p className="text-xs text-[#1C1F25] font-semibold mb-1">
                   À titre indicatif
                 </p>
-                <p className="text-xs text-blue-600 leading-relaxed">
+                <p className="text-xs text-[#1C1F25] leading-relaxed">
                   Le loyer final sera négocié avec notre équipe lors de la phase de discussion.
                   Snapdesk peut également proposer une structure de rémunération variable.
                 </p>
@@ -341,7 +341,7 @@ export default function NouvelEspacePage() {
         {step < 4 ? (
           <Button
             onClick={() => setStep(step + 1)}
-            className="bg-[#1a3a5c] hover:bg-[#0f2540] text-white gap-2"
+            className="bg-[#1C1F25] hover:bg-[#111318] text-white gap-2"
             disabled={
               (step === 1 && (!form.nom || !form.adresse || !form.ville)) ||
               (step === 2 && (!form.superficie || !form.typeEspace)) ||
@@ -353,7 +353,7 @@ export default function NouvelEspacePage() {
         ) : (
           <Button
             onClick={handleSubmit}
-            className="bg-[#1a3a5c] hover:bg-[#0f2540] text-white gap-2"
+            className="bg-[#1C1F25] hover:bg-[#111318] text-white gap-2"
             disabled={!form.description}
           >
             Soumettre l'espace <CheckCircle2 className="w-4 h-4" />

@@ -98,7 +98,7 @@ export default function CahierDesChargesPage() {
         <Card className="max-w-md w-full border-0 shadow-lg text-center">
           <CardContent className="p-10">
             <CheckCircle2 className="w-16 h-16 text-green-500 mx-auto mb-5" />
-            <h2 className="text-2xl font-bold text-[#1a3a5c] mb-2">Cahier des charges envoyé !</h2>
+            <h2 className="text-2xl font-bold text-[#1C1F25] mb-2">Cahier des charges envoyé !</h2>
             <p className="text-slate-600 mb-3">
               Notre équipe analyse vos besoins et vous préparera une sélection d'espaces sous 48h.
             </p>
@@ -112,7 +112,7 @@ export default function CahierDesChargesPage() {
   return (
     <div className="max-w-3xl mx-auto space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-[#1a3a5c]">Cahier des charges</h1>
+        <h1 className="text-2xl font-bold text-[#1C1F25]">Cahier des charges</h1>
         <p className="text-slate-500 mt-1">
           Décrivez vos besoins pour que nos experts vous proposent les espaces les plus adaptés.
         </p>
@@ -124,10 +124,10 @@ export default function CahierDesChargesPage() {
           <div key={s.num} className="flex-1">
             <div
               className={`h-1.5 rounded-full transition-all ${
-                step >= s.num ? "bg-amber-500" : "bg-slate-200"
+                step >= s.num ? "bg-[#E590A1]" : "bg-slate-200"
               }`}
             />
-            <p className={`text-xs mt-1.5 font-medium ${step >= s.num ? "text-amber-600" : "text-slate-400"}`}>
+            <p className={`text-xs mt-1.5 font-medium ${step >= s.num ? "text-[#E590A1]" : "text-slate-400"}`}>
               {s.label}
             </p>
           </div>
@@ -136,7 +136,7 @@ export default function CahierDesChargesPage() {
 
       <Card className="border-0 shadow-sm">
         <CardHeader>
-          <CardTitle className="text-lg font-semibold text-[#1a3a5c] flex items-center gap-2">
+          <CardTitle className="text-lg font-semibold text-[#1C1F25] flex items-center gap-2">
             {step === 1 && <MapPin className="w-5 h-5" />}
             {step === 2 && <Maximize2 className="w-5 h-5" />}
             {step === 3 && <Euro className="w-5 h-5" />}
@@ -167,8 +167,8 @@ export default function CahierDesChargesPage() {
                       onClick={() => toggleItem("villes", v)}
                       className={`px-3 py-1.5 rounded-full text-sm border transition-all ${
                         form.villes.includes(v)
-                          ? "bg-amber-500 text-white border-amber-500"
-                          : "border-slate-200 text-slate-600 hover:border-amber-300"
+                          ? "bg-[#E590A1] text-white border-[#E590A1]"
+                          : "border-slate-200 text-slate-600 hover:border-[#E590A1]/50"
                       }`}
                     >
                       {v}
@@ -257,7 +257,7 @@ export default function CahierDesChargesPage() {
                       onClick={() => update("typeEspace", type)}
                       className={`p-3 rounded-lg border text-sm text-left transition-all ${
                         form.typeEspace === type
-                          ? "border-amber-500 bg-amber-50 text-amber-700 font-medium"
+                          ? "border-[#E590A1] bg-[#fdf0f3] text-[#c4607a] font-medium"
                           : "border-slate-200 text-slate-600 hover:border-slate-300"
                       }`}
                     >
@@ -320,7 +320,7 @@ export default function CahierDesChargesPage() {
                       onClick={() => update("charges", opt)}
                       className={`flex-1 py-3 rounded-lg border text-sm transition-all capitalize ${
                         form.charges === opt
-                          ? "border-amber-500 bg-amber-50 text-amber-700 font-medium"
+                          ? "border-[#E590A1] bg-[#fdf0f3] text-[#c4607a] font-medium"
                           : "border-slate-200 text-slate-600"
                       }`}
                     >
@@ -368,7 +368,7 @@ export default function CahierDesChargesPage() {
               </div>
 
               <div className="p-4 bg-slate-50 rounded-lg border border-slate-200 space-y-4">
-                <p className="text-sm font-semibold text-[#1a3a5c]">Contact principal</p>
+                <p className="text-sm font-semibold text-[#1C1F25]">Contact principal</p>
                 <div className="grid grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <Label>Nom & prénom *</Label>
@@ -416,7 +416,7 @@ export default function CahierDesChargesPage() {
         {step < 4 ? (
           <Button
             onClick={() => setStep(step + 1)}
-            className="bg-amber-500 hover:bg-amber-600 text-white gap-2"
+            className="bg-[#E590A1] hover:bg-[#d4788e] text-white gap-2"
             disabled={
               (step === 1 && (!form.nomRecherche || form.villes.length === 0 || !form.disponibilite)) ||
               (step === 2 && (!form.superficie || !form.typeEspace || !form.capacite)) ||
@@ -428,7 +428,7 @@ export default function CahierDesChargesPage() {
         ) : (
           <Button
             onClick={handleSubmit}
-            className="bg-amber-500 hover:bg-amber-600 text-white gap-2"
+            className="bg-[#E590A1] hover:bg-[#d4788e] text-white gap-2"
             disabled={!form.contactNom}
           >
             Envoyer mon cahier des charges <CheckCircle2 className="w-4 h-4" />

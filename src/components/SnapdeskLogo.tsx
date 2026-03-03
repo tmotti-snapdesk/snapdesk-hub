@@ -7,24 +7,36 @@ interface LogoProps {
 }
 
 export function SnapdeskLogo({ className = "", variant = "dark", size = "md" }: LogoProps) {
-  const sizes = { sm: "text-lg", md: "text-2xl", lg: "text-4xl" };
-  const colors = {
-    dark: "text-[#1a3a5c]",
-    light: "text-white",
-  };
+  const textSizes = { sm: "text-xl", md: "text-2xl", lg: "text-4xl" };
+  const chevronSizes = { sm: "text-base", md: "text-lg", lg: "text-3xl" };
+
+  const textColor = variant === "dark" ? "#1C1F25" : "#ffffff";
+  const chevronColor = "#A9BCB7";
 
   return (
-    <div className={`flex items-center gap-2 ${className}`}>
-      {/* Placeholder logo mark - replace with actual SVG */}
-      <div
-        className={`flex items-center justify-center rounded-lg font-black ${
-          size === "sm" ? "w-7 h-7 text-xs" : size === "md" ? "w-9 h-9 text-sm" : "w-14 h-14 text-xl"
-        } ${variant === "dark" ? "bg-[#1a3a5c] text-white" : "bg-white text-[#1a3a5c]"}`}
+    <div className={`flex items-center select-none ${className}`} style={{ gap: 0 }}>
+      <span
+        style={{
+          fontFamily: "'DM Sans', sans-serif",
+          fontWeight: 600,
+          color: textColor,
+          letterSpacing: "-0.02em",
+          lineHeight: 1,
+        }}
+        className={textSizes[size]}
       >
-        S
-      </div>
-      <span className={`font-bold tracking-tight ${sizes[size]} ${colors[variant]}`}>
         snapdesk
+      </span>
+      <span
+        style={{
+          fontFamily: "'DM Sans', sans-serif",
+          fontWeight: 700,
+          color: chevronColor,
+          lineHeight: 1,
+        }}
+        className={chevronSizes[size]}
+      >
+        {"<"}
       </span>
     </div>
   );

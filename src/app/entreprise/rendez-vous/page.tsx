@@ -47,7 +47,7 @@ export default function RendezVousPage() {
         <Card className="max-w-md w-full border-0 shadow-lg text-center">
           <CardContent className="p-10">
             <CheckCircle2 className="w-16 h-16 text-green-500 mx-auto mb-5" />
-            <h2 className="text-2xl font-bold text-[#1a3a5c] mb-2">
+            <h2 className="text-2xl font-bold text-[#1C1F25] mb-2">
               Rendez-vous confirmé !
             </h2>
             <p className="text-slate-600">
@@ -83,7 +83,7 @@ export default function RendezVousPage() {
   return (
     <div className="max-w-2xl mx-auto space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-[#1a3a5c]">Prendre rendez-vous</h1>
+        <h1 className="text-2xl font-bold text-[#1C1F25]">Prendre rendez-vous</h1>
         <p className="text-slate-500 mt-1">
           Échangez avec un expert Snapdesk pour affiner votre recherche ou organiser des visites.
         </p>
@@ -93,7 +93,7 @@ export default function RendezVousPage() {
         {/* Format */}
         <Card className="border-0 shadow-sm">
           <CardHeader>
-            <CardTitle className="text-base text-[#1a3a5c]">Format du rendez-vous</CardTitle>
+            <CardTitle className="text-base text-[#1C1F25]">Format du rendez-vous</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-3 gap-3">
@@ -106,18 +106,18 @@ export default function RendezVousPage() {
                     onClick={() => setFormat(f.id)}
                     className={`p-4 rounded-xl border-2 text-center transition-all ${
                       format === f.id
-                        ? "border-[#1a3a5c] bg-blue-50"
+                        ? "border-[#1C1F25] bg-[#eef3f2]"
                         : "border-slate-200 hover:border-slate-300"
                     }`}
                   >
                     <Icon
                       className={`w-6 h-6 mx-auto mb-2 ${
-                        format === f.id ? "text-[#1a3a5c]" : "text-slate-400"
+                        format === f.id ? "text-[#1C1F25]" : "text-slate-400"
                       }`}
                     />
                     <p
                       className={`text-sm font-medium ${
-                        format === f.id ? "text-[#1a3a5c]" : "text-slate-600"
+                        format === f.id ? "text-[#1C1F25]" : "text-slate-600"
                       }`}
                     >
                       {f.label}
@@ -133,7 +133,7 @@ export default function RendezVousPage() {
         {/* Créneau */}
         <Card className="border-0 shadow-sm">
           <CardHeader>
-            <CardTitle className="text-base text-[#1a3a5c] flex items-center gap-2">
+            <CardTitle className="text-base text-[#1C1F25] flex items-center gap-2">
               <Calendar className="w-4 h-4" />
               Choisir un créneau
             </CardTitle>
@@ -162,7 +162,7 @@ export default function RendezVousPage() {
                     onClick={() => setCreneau(c)}
                     className={`py-2 px-3 rounded-lg border text-sm transition-all ${
                       creneau === c
-                        ? "border-[#1a3a5c] bg-blue-50 text-[#1a3a5c] font-medium"
+                        ? "border-[#1C1F25] bg-[#eef3f2] text-[#1C1F25] font-medium"
                         : "border-slate-200 text-slate-600 hover:border-slate-300"
                     }`}
                   >
@@ -177,7 +177,7 @@ export default function RendezVousPage() {
         {/* Infos */}
         <Card className="border-0 shadow-sm">
           <CardHeader>
-            <CardTitle className="text-base text-[#1a3a5c]">Vos informations</CardTitle>
+            <CardTitle className="text-base text-[#1C1F25]">Vos informations</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="grid grid-cols-2 gap-4">
@@ -214,7 +214,7 @@ export default function RendezVousPage() {
 
         <Button
           type="submit"
-          className="w-full bg-[#1a3a5c] hover:bg-[#0f2540] text-white py-6 text-base"
+          className="w-full bg-[#1C1F25] hover:bg-[#111318] text-white py-6 text-base"
           disabled={!date || !creneau || !nom}
         >
           Confirmer le rendez-vous

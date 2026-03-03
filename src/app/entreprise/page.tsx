@@ -22,11 +22,11 @@ import {
 
 const STATUT_COLORS: Record<string, string> = {
   en_attente: "bg-slate-100 text-slate-600",
-  espaces_proposes: "bg-blue-100 text-blue-700",
+  espaces_proposes: "bg-blue-100 text-[#1C1F25]",
   selection_faite: "bg-indigo-100 text-indigo-700",
   visite_planifiee: "bg-yellow-100 text-yellow-700",
   visite_effectuee: "bg-orange-100 text-orange-700",
-  loi_envoyee: "bg-amber-100 text-amber-700",
+  loi_envoyee: "bg-amber-100 text-[#c4607a]",
   projet_contrat: "bg-purple-100 text-purple-700",
   contrat_signe: "bg-green-100 text-green-700",
 };
@@ -45,8 +45,8 @@ export default function EntrepriseDashboard() {
       label: "Recherches actives",
       value: projets.length,
       icon: Search,
-      color: "text-blue-600",
-      bg: "bg-blue-50",
+      color: "text-[#1C1F25]",
+      bg: "bg-[#eef3f2]",
     },
     {
       label: "Espaces reçus",
@@ -59,8 +59,8 @@ export default function EntrepriseDashboard() {
       label: "Espaces sélectionnés",
       value: projets.reduce((s, p) => s + p.espacesSelectionnes.length, 0),
       icon: Star,
-      color: "text-amber-600",
-      bg: "bg-amber-50",
+      color: "text-[#E590A1]",
+      bg: "bg-[#fdf0f3]",
     },
     {
       label: "RDV planifiés",
@@ -76,7 +76,7 @@ export default function EntrepriseDashboard() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-[#1a3a5c]">
+          <h1 className="text-2xl font-bold text-[#1C1F25]">
             Bonjour, {user?.name?.split(" ")[0]} 👋
           </h1>
           <p className="text-slate-500 mt-1">
@@ -84,7 +84,7 @@ export default function EntrepriseDashboard() {
           </p>
         </div>
         <Link href="/entreprise/cahier-des-charges">
-          <Button className="bg-[#1a3a5c] hover:bg-[#0f2540] text-white gap-2">
+          <Button className="bg-[#1C1F25] hover:bg-[#111318] text-white gap-2">
             <ClipboardList className="w-4 h-4" />
             Nouvelle recherche
           </Button>
@@ -103,7 +103,7 @@ export default function EntrepriseDashboard() {
                 >
                   <Icon className={`w-5 h-5 ${stat.color}`} />
                 </div>
-                <p className="text-2xl font-bold text-[#1a3a5c]">{stat.value}</p>
+                <p className="text-2xl font-bold text-[#1C1F25]">{stat.value}</p>
                 <p className="text-xs text-slate-500 mt-0.5">{stat.label}</p>
               </CardContent>
             </Card>
@@ -114,11 +114,11 @@ export default function EntrepriseDashboard() {
       {/* Projets en cours */}
       <Card className="border-0 shadow-sm">
         <CardHeader className="flex flex-row items-center justify-between pb-4">
-          <CardTitle className="text-lg font-semibold text-[#1a3a5c]">
+          <CardTitle className="text-lg font-semibold text-[#1C1F25]">
             Mes recherches
           </CardTitle>
           <Link href="/entreprise/projets">
-            <Button variant="ghost" size="sm" className="text-[#1a3a5c] gap-1">
+            <Button variant="ghost" size="sm" className="text-[#1C1F25] gap-1">
               Voir tout <ArrowRight className="w-3 h-3" />
             </Button>
           </Link>
@@ -126,13 +126,13 @@ export default function EntrepriseDashboard() {
         <CardContent className="space-y-3">
           {projets.map((projet) => (
             <Link key={projet.id} href={`/entreprise/projets/${projet.id}`}>
-              <div className="flex items-center justify-between p-4 rounded-xl border border-slate-100 hover:border-[#1a3a5c]/30 hover:bg-blue-50/40 transition-all cursor-pointer">
+              <div className="flex items-center justify-between p-4 rounded-xl border border-slate-100 hover:border-[#1C1F25]/30 hover:bg-[#eef3f2]/40 transition-all cursor-pointer">
                 <div className="flex items-center gap-4">
-                  <div className="w-10 h-10 bg-amber-50 rounded-lg flex items-center justify-center">
-                    <Search className="w-5 h-5 text-amber-600" />
+                  <div className="w-10 h-10 bg-[#fdf0f3] rounded-lg flex items-center justify-center">
+                    <Search className="w-5 h-5 text-[#E590A1]" />
                   </div>
                   <div>
-                    <p className="font-semibold text-[#1a3a5c] text-sm">{projet.nom}</p>
+                    <p className="font-semibold text-[#1C1F25] text-sm">{projet.nom}</p>
                     <p className="text-xs text-slate-500">
                       {projet.cahierDesCharges.ville} — {projet.cahierDesCharges.superficie} m²
                       min — {projet.cahierDesCharges.capacite} postes
@@ -158,7 +158,7 @@ export default function EntrepriseDashboard() {
               <Search className="w-12 h-12 mx-auto mb-3 opacity-30" />
               <p>Vous n'avez pas encore démarré de recherche.</p>
               <Link href="/entreprise/cahier-des-charges">
-                <Button variant="outline" className="mt-3 text-[#1a3a5c]">
+                <Button variant="outline" className="mt-3 text-[#1C1F25]">
                   Démarrer ma recherche
                 </Button>
               </Link>
@@ -175,8 +175,8 @@ export default function EntrepriseDashboard() {
             title: "Espaces proposés",
             desc: "Consultez la sélection d'espaces établie par Snapdesk.",
             href: "/entreprise/espaces",
-            color: "text-[#1a3a5c]",
-            bg: "bg-blue-50",
+            color: "text-[#1C1F25]",
+            bg: "bg-[#eef3f2]",
           },
           {
             icon: Calendar,
@@ -205,7 +205,7 @@ export default function EntrepriseDashboard() {
                   >
                     <Icon className={`w-5 h-5 ${item.color}`} />
                   </div>
-                  <h3 className="font-semibold text-[#1a3a5c] mb-1">{item.title}</h3>
+                  <h3 className="font-semibold text-[#1C1F25] mb-1">{item.title}</h3>
                   <p className="text-xs text-slate-500 leading-relaxed">{item.desc}</p>
                 </CardContent>
               </Card>

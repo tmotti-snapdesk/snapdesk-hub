@@ -37,7 +37,7 @@ export default function SignInPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#0f2540] via-[#1a3a5c] to-[#0d3270] flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-[#1C1F25] via-[#2a3040] to-[#1C1F25] flex items-center justify-center p-4">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
           <SnapdeskLogo variant="light" size="lg" className="justify-center mb-4" />
@@ -45,7 +45,7 @@ export default function SignInPage() {
 
         <Card className="border-0 shadow-2xl">
           <CardHeader className="text-center pb-4">
-            <CardTitle className="text-2xl font-bold text-[#1a3a5c]">
+            <CardTitle className="text-2xl font-bold text-[#1C1F25]">
               Connexion
             </CardTitle>
             <CardDescription>
@@ -100,7 +100,7 @@ export default function SignInPage() {
 
               <Button
                 type="submit"
-                className="w-full bg-[#1a3a5c] hover:bg-[#0f2540] text-white"
+                className="w-full bg-[#1C1F25] hover:bg-[#111318] text-white"
                 disabled={loading}
               >
                 {loading ? "Connexion..." : "Se connecter"}
@@ -108,11 +108,11 @@ export default function SignInPage() {
             </form>
 
             {/* Demo accounts */}
-            <div className="mt-6 p-4 bg-blue-50 rounded-lg border border-blue-100">
-              <p className="text-xs font-semibold text-blue-700 mb-2">
+            <div className="mt-6 p-4 bg-[#eef3f2] rounded-lg border border-[#A9BCB7]/30">
+              <p className="text-xs font-semibold text-[#1C1F25] mb-2">
                 Comptes de démonstration
               </p>
-              <div className="space-y-1 text-xs text-blue-600">
+              <div className="space-y-1 text-xs text-[#1C1F25]">
                 <button
                   onClick={() => { setEmail("proprietaire@demo.com"); setPassword("demo1234"); }}
                   className="block hover:underline text-left"
@@ -132,7 +132,7 @@ export default function SignInPage() {
           <CardFooter className="flex flex-col gap-3 text-center text-sm text-slate-500">
             <p>
               Pas encore de compte ?{" "}
-              <Link href="/signup" className="text-[#1a3a5c] font-semibold hover:underline">
+              <Link href="/signup" className="text-[#1C1F25] font-semibold hover:underline">
                 S'inscrire
               </Link>
             </p>

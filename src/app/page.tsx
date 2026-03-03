@@ -32,10 +32,10 @@ export default function HubPage() {
       cta: "Accéder à l'espace propriétaire",
       href: "/proprietaire",
       external: false,
-      borderColor: "border-blue-200 hover:border-[#1a3a5c]",
-      iconBg: "bg-[#1a3a5c]",
+      borderColor: "border-[#A9BCB7]/40 hover:border-[#A9BCB7]",
+      iconBg: "bg-[#A9BCB7]",
       iconColor: "text-white",
-      ctaColor: "text-[#1a3a5c]",
+      ctaColor: "text-[#A9BCB7]",
       features: [
         "Soumission d'espaces",
         "Suivi de projet",
@@ -52,10 +52,10 @@ export default function HubPage() {
       cta: "Démarrer ma recherche",
       href: "/entreprise",
       external: false,
-      borderColor: "border-amber-200 hover:border-amber-500",
-      iconBg: "bg-amber-500",
+      borderColor: "border-[#E590A1]/40 hover:border-[#E590A1]",
+      iconBg: "bg-[#E590A1]",
       iconColor: "text-white",
-      ctaColor: "text-amber-600",
+      ctaColor: "text-[#E590A1]",
       features: [
         "Cahier des charges",
         "Sélection d'espaces",
@@ -80,7 +80,7 @@ export default function HubPage() {
           <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">
             {portail.subtitle}
           </p>
-          <h2 className="text-xl font-bold text-[#1a3a5c] mb-3 leading-snug">
+          <h2 className="text-xl font-bold text-[#1C1F25] mb-3 leading-snug">
             {portail.title}
           </h2>
           <p className="text-slate-600 text-sm leading-relaxed">
@@ -91,7 +91,7 @@ export default function HubPage() {
         <ul className="space-y-1.5">
           {portail.features.map((f) => (
             <li key={f} className="flex items-center gap-2 text-sm text-slate-500">
-              <CheckCircle2 className="w-4 h-4 text-[#1a3a5c] flex-shrink-0" />
+              <CheckCircle2 className="w-4 h-4 text-[#A9BCB7] flex-shrink-0" />
               {f}
             </li>
           ))}
@@ -108,13 +108,13 @@ export default function HubPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#0f2540] via-[#1a3a5c] to-[#0d3270]">
+    <div className="min-h-screen bg-gradient-to-br from-[#1C1F25] via-[#2a3040] to-[#1C1F25]">
       <header className="pt-12 pb-10 px-6 text-center">
         <SnapdeskLogo variant="light" size="lg" className="justify-center mb-8" />
         <h1 className="text-3xl md:text-5xl font-bold text-white mb-4 leading-tight">
           Votre espace personnel
         </h1>
-        <p className="text-blue-200 text-lg md:text-xl max-w-2xl mx-auto">
+        <p className="text-white/50 text-lg md:text-xl max-w-2xl mx-auto">
           Bienvenue sur le portail Snapdesk. Sélectionnez votre profil pour
           accéder à votre espace dédié.
         </p>
@@ -140,7 +140,7 @@ export default function HubPage() {
         )}
       </main>
 
-      <footer className="text-center py-6 text-blue-300 text-sm">
+      <footer className="text-center py-6 text-white/40 text-sm">
         © {new Date().getFullYear()} Snapdesk — Tous droits réservés
       </footer>
     </div>

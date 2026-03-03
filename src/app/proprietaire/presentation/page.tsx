@@ -88,7 +88,7 @@ export default function PresentationPage() {
     <div className="space-y-12 max-w-5xl">
       {/* Hero */}
       <div className="text-center py-8">
-        <h1 className="text-3xl md:text-4xl font-bold text-[#1a3a5c] mb-4">
+        <h1 className="text-3xl md:text-4xl font-bold text-[#1C1F25] mb-4">
           Le modèle Snapdesk pour les propriétaires
         </h1>
         <p className="text-slate-600 text-lg max-w-3xl mx-auto leading-relaxed">
@@ -102,7 +102,7 @@ export default function PresentationPage() {
         {chiffres.map((c) => (
           <Card key={c.label} className="border-0 shadow-sm text-center">
             <CardContent className="p-6">
-              <p className="text-3xl font-bold text-[#1a3a5c] mb-1">{c.value}</p>
+              <p className="text-3xl font-bold text-[#1C1F25] mb-1">{c.value}</p>
               <p className="text-sm text-slate-500">{c.label}</p>
             </CardContent>
           </Card>
@@ -111,7 +111,7 @@ export default function PresentationPage() {
 
       {/* Comment ça marche */}
       <div>
-        <h2 className="text-2xl font-bold text-[#1a3a5c] mb-6">
+        <h2 className="text-2xl font-bold text-[#1C1F25] mb-6">
           Comment ça fonctionne ?
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -121,7 +121,7 @@ export default function PresentationPage() {
               <Card key={etape.num} className="border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
                 <CardContent className="p-6 flex gap-4">
                   <div className="flex-shrink-0">
-                    <div className="w-12 h-12 bg-[#1a3a5c] rounded-xl flex items-center justify-center">
+                    <div className="w-12 h-12 bg-[#1C1F25] rounded-xl flex items-center justify-center">
                       <Icon className="w-6 h-6 text-white" />
                     </div>
                   </div>
@@ -129,7 +129,7 @@ export default function PresentationPage() {
                     <span className="text-xs font-bold text-[#2563eb] tracking-widest">
                       ÉTAPE {etape.num}
                     </span>
-                    <h3 className="font-bold text-[#1a3a5c] mt-0.5 mb-2">{etape.title}</h3>
+                    <h3 className="font-bold text-[#1C1F25] mt-0.5 mb-2">{etape.title}</h3>
                     <p className="text-sm text-slate-600 leading-relaxed">{etape.desc}</p>
                   </div>
                 </CardContent>
@@ -141,7 +141,7 @@ export default function PresentationPage() {
 
       {/* Avantages */}
       <div>
-        <h2 className="text-2xl font-bold text-[#1a3a5c] mb-6">
+        <h2 className="text-2xl font-bold text-[#1C1F25] mb-6">
           Pourquoi choisir Snapdesk ?
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -150,10 +150,10 @@ export default function PresentationPage() {
             return (
               <Card key={av.title} className="border border-slate-100 shadow-sm">
                 <CardContent className="p-5">
-                  <div className="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center mb-3">
-                    <Icon className="w-5 h-5 text-[#1a3a5c]" />
+                  <div className="w-10 h-10 bg-[#eef3f2] rounded-lg flex items-center justify-center mb-3">
+                    <Icon className="w-5 h-5 text-[#1C1F25]" />
                   </div>
-                  <h3 className="font-semibold text-[#1a3a5c] mb-1">{av.title}</h3>
+                  <h3 className="font-semibold text-[#1C1F25] mb-1">{av.title}</h3>
                   <p className="text-sm text-slate-600 leading-relaxed">{av.desc}</p>
                 </CardContent>
               </Card>
@@ -165,7 +165,7 @@ export default function PresentationPage() {
       {/* Ce que Snapdesk prend en charge */}
       <Card className="border-0 shadow-sm bg-slate-50">
         <CardContent className="p-8">
-          <h2 className="text-xl font-bold text-[#1a3a5c] mb-5">
+          <h2 className="text-xl font-bold text-[#1C1F25] mb-5">
             Ce que Snapdesk prend en charge
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -190,14 +190,14 @@ export default function PresentationPage() {
 
       {/* CTA */}
       <div className="text-center pb-8">
-        <h2 className="text-xl font-bold text-[#1a3a5c] mb-3">
+        <h2 className="text-xl font-bold text-[#1C1F25] mb-3">
           Prêt à soumettre votre espace ?
         </h2>
         <p className="text-slate-600 mb-6">
           Notre équipe sourcing vous répondra sous 48 heures.
         </p>
         <Link href="/proprietaire/nouvel-espace">
-          <Button className="bg-[#1a3a5c] hover:bg-[#0f2540] text-white px-8 py-6 text-base gap-2">
+          <Button className="bg-[#1C1F25] hover:bg-[#111318] text-white px-8 py-6 text-base gap-2">
             Soumettre un espace <ArrowRight className="w-4 h-4" />
           </Button>
         </Link>

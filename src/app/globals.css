@@ -1,13 +1,14 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap');
 
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
+  --font-sans: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --font-mono: var(--font-geist-mono);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
@@ -55,15 +56,18 @@
   --card-foreground: oklch(0.15 0.03 250);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.15 0.03 250);
-  /* Snapdesk Navy Blue */
-  --primary: oklch(0.28 0.08 248);
-  --primary-foreground: oklch(0.99 0 0);
-  --secondary: oklch(0.96 0.01 248);
-  --secondary-foreground: oklch(0.28 0.08 248);
-  --muted: oklch(0.96 0.01 248);
-  --muted-foreground: oklch(0.52 0.04 257);
-  --accent: oklch(0.95 0.03 248);
-  --accent-foreground: oklch(0.28 0.08 248);
+  /* Snapdesk Brand */
+  --primary: #1C1F25;
+  --primary-foreground: #ffffff;
+  --secondary: #f4f6f5;
+  --secondary-foreground: #1C1F25;
+  --muted: #f4f6f5;
+  --muted-foreground: #6b7280;
+  --accent: #eef3f2;
+  --accent-foreground: #1C1F25;
+  --brand-sage: #A9BCB7;
+  --brand-rose: #E590A1;
+  --brand-dark: #1C1F25;
   --destructive: oklch(0.577 0.245 27.325);
   --border: oklch(0.929 0.013 255.508);
   --input: oklch(0.929 0.013 255.508);
@@ -123,5 +127,7 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    color: #1C1F25;
   }
 }

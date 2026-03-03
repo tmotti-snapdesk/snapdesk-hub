@@ -35,10 +35,10 @@ export default function SignUpPage() {
 
   if (success) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-[#0f2540] via-[#1a3a5c] to-[#0d3270] flex items-center justify-center p-4">
+      <div className="min-h-screen bg-gradient-to-br from-[#1C1F25] via-[#2a3040] to-[#1C1F25] flex items-center justify-center p-4">
         <Card className="w-full max-w-md text-center p-8 border-0 shadow-2xl">
           <CheckCircle2 className="w-16 h-16 text-green-500 mx-auto mb-4" />
-          <h2 className="text-2xl font-bold text-[#1a3a5c] mb-2">Demande envoyée !</h2>
+          <h2 className="text-2xl font-bold text-[#1C1F25] mb-2">Demande envoyée !</h2>
           <p className="text-slate-600">
             Notre équipe va valider votre compte et vous recontacter sous 24h. Redirection vers la connexion…
           </p>
@@ -48,7 +48,7 @@ export default function SignUpPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#0f2540] via-[#1a3a5c] to-[#0d3270] flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-[#1C1F25] via-[#2a3040] to-[#1C1F25] flex items-center justify-center p-4">
       <div className="w-full max-w-lg">
         <div className="text-center mb-8">
           <SnapdeskLogo variant="light" size="lg" className="justify-center mb-4" />
@@ -56,7 +56,7 @@ export default function SignUpPage() {
 
         <Card className="border-0 shadow-2xl">
           <CardHeader className="text-center pb-4">
-            <CardTitle className="text-2xl font-bold text-[#1a3a5c]">
+            <CardTitle className="text-2xl font-bold text-[#1C1F25]">
               Créer un compte
             </CardTitle>
             <CardDescription>
@@ -88,16 +88,16 @@ export default function SignUpPage() {
                       onClick={() => setRole(opt.key)}
                       className={`p-6 rounded-xl border-2 text-left transition-all ${
                         role === opt.key
-                          ? "border-[#1a3a5c] bg-blue-50"
+                          ? "border-[#1C1F25] bg-[#eef3f2]"
                           : "border-slate-200 hover:border-slate-300"
                       }`}
                     >
                       <Icon
                         className={`w-8 h-8 mb-3 ${
-                          role === opt.key ? "text-[#1a3a5c]" : "text-slate-400"
+                          role === opt.key ? "text-[#1C1F25]" : "text-slate-400"
                         }`}
                       />
-                      <p className="font-semibold text-[#1a3a5c]">{opt.label}</p>
+                      <p className="font-semibold text-[#1C1F25]">{opt.label}</p>
                       <p className="text-xs text-slate-500 mt-1">{opt.desc}</p>
                     </button>
                   );
@@ -166,7 +166,7 @@ export default function SignUpPage() {
                 )}
                 <Button
                   type="submit"
-                  className="w-full bg-[#1a3a5c] hover:bg-[#0f2540] text-white"
+                  className="w-full bg-[#1C1F25] hover:bg-[#111318] text-white"
                   disabled={form.password !== form.confirm}
                 >
                   Envoyer ma demande d'accès
@@ -178,7 +178,7 @@ export default function SignUpPage() {
           <CardFooter className="flex flex-col gap-3">
             {step === 1 && (
               <Button
-                className="w-full bg-[#1a3a5c] hover:bg-[#0f2540] text-white"
+                className="w-full bg-[#1C1F25] hover:bg-[#111318] text-white"
                 disabled={!role}
                 onClick={() => setStep(2)}
               >
@@ -192,7 +192,7 @@ export default function SignUpPage() {
             )}
             <p className="text-sm text-slate-500 text-center">
               Déjà un compte ?{" "}
-              <Link href="/signin" className="text-[#1a3a5c] font-semibold hover:underline">
+              <Link href="/signin" className="text-[#1C1F25] font-semibold hover:underline">
                 Se connecter
               </Link>
             </p>

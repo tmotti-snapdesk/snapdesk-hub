@@ -17,11 +17,11 @@ export function StatusTimeline({ steps, currentStep }: StatusTimelineProps) {
 
   return (
     <div className="relative">
-      {/* Connecting line */}
       <div className="absolute top-5 left-5 right-5 h-0.5 bg-slate-200" />
       <div
-        className="absolute top-5 left-5 h-0.5 bg-[#1a3a5c] transition-all duration-500"
+        className="absolute top-5 left-5 h-0.5 transition-all duration-500"
         style={{
+          backgroundColor: "#A9BCB7",
           width:
             currentIndex === 0
               ? "0%"
@@ -40,11 +40,18 @@ export function StatusTimeline({ steps, currentStep }: StatusTimelineProps) {
               <div
                 className={`w-10 h-10 rounded-full flex items-center justify-center border-2 transition-all z-10 ${
                   isDone
-                    ? "bg-[#1a3a5c] border-[#1a3a5c] text-white"
+                    ? "text-white"
                     : isCurrent
-                    ? "bg-white border-[#1a3a5c] text-[#1a3a5c]"
+                    ? "bg-white text-[#A9BCB7]"
                     : "bg-white border-slate-200 text-slate-300"
                 }`}
+                style={
+                  isDone
+                    ? { backgroundColor: "#A9BCB7", borderColor: "#A9BCB7" }
+                    : isCurrent
+                    ? { borderColor: "#A9BCB7" }
+                    : {}
+                }
               >
                 {isDone ? (
                   <Check className="w-5 h-5" />
@@ -54,7 +61,7 @@ export function StatusTimeline({ steps, currentStep }: StatusTimelineProps) {
               </div>
               <span
                 className={`text-xs text-center max-w-[80px] font-medium leading-tight ${
-                  isDone || isCurrent ? "text-[#1a3a5c]" : "text-slate-400"
+                  isDone || isCurrent ? "text-[#1C1F25]" : "text-slate-400"
                 }`}
               >
                 {step.label}

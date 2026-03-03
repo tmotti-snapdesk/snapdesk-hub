@@ -11,7 +11,7 @@ import {
 import { Building2, ArrowRight, Plus, FileText } from "lucide-react";
 
 const STATUT_COLORS: Record<string, string> = {
-  receptionne: "bg-blue-100 text-blue-700 border-blue-200",
+  receptionne: "bg-blue-100 text-[#1C1F25] border-[#A9BCB7]/40",
   visite_planifiee: "bg-yellow-100 text-yellow-700 border-yellow-200",
   visite_effectuee: "bg-orange-100 text-orange-700 border-orange-200",
   en_discussion: "bg-purple-100 text-purple-700 border-purple-200",
@@ -26,13 +26,13 @@ export default function ProjetsPage() {
     <div className="space-y-6 max-w-5xl">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-[#1a3a5c]">Mes projets</h1>
+          <h1 className="text-2xl font-bold text-[#1C1F25]">Mes projets</h1>
           <p className="text-slate-500 mt-1">
             Suivez l'avancement de chaque espace soumis à Snapdesk.
           </p>
         </div>
         <Link href="/proprietaire/nouvel-espace">
-          <Button className="bg-[#1a3a5c] hover:bg-[#0f2540] text-white gap-2">
+          <Button className="bg-[#1C1F25] hover:bg-[#111318] text-white gap-2">
             <Plus className="w-4 h-4" />
             Nouvel espace
           </Button>
@@ -45,7 +45,7 @@ export default function ProjetsPage() {
             <Building2 className="w-12 h-12 text-slate-200 mx-auto mb-4" />
             <p className="text-slate-500 mb-4">Vous n'avez pas encore soumis d'espace.</p>
             <Link href="/proprietaire/nouvel-espace">
-              <Button className="bg-[#1a3a5c] hover:bg-[#0f2540] text-white">
+              <Button className="bg-[#1C1F25] hover:bg-[#111318] text-white">
                 Soumettre mon premier espace
               </Button>
             </Link>
@@ -65,11 +65,11 @@ export default function ProjetsPage() {
                 <CardContent className="p-6">
                   <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                     <div className="flex items-start gap-4">
-                      <div className="w-12 h-12 bg-[#1a3a5c]/10 rounded-xl flex items-center justify-center flex-shrink-0">
-                        <Building2 className="w-6 h-6 text-[#1a3a5c]" />
+                      <div className="w-12 h-12 bg-[#1C1F25]/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                        <Building2 className="w-6 h-6 text-[#1C1F25]" />
                       </div>
                       <div>
-                        <h3 className="font-bold text-[#1a3a5c] text-lg">{espace.nom}</h3>
+                        <h3 className="font-bold text-[#1C1F25] text-lg">{espace.nom}</h3>
                         <p className="text-sm text-slate-500 mt-0.5">
                           {espace.adresse}, {espace.ville} — {espace.superficie} m² —{" "}
                           {espace.capacite} postes
@@ -110,7 +110,7 @@ export default function ProjetsPage() {
                     </div>
                     <div className="h-1.5 bg-slate-100 rounded-full overflow-hidden">
                       <div
-                        className="h-full bg-[#1a3a5c] rounded-full transition-all"
+                        className="h-full bg-[#1C1F25] rounded-full transition-all"
                         style={{ width: `${progress}%` }}
                       />
                     </div>
@@ -119,7 +119,7 @@ export default function ProjetsPage() {
                         <span
                           key={s}
                           className={`text-[10px] whitespace-nowrap ${
-                            i <= currentIndex ? "text-[#1a3a5c] font-medium" : "text-slate-300"
+                            i <= currentIndex ? "text-[#1C1F25] font-medium" : "text-slate-300"
                           }`}
                         >
                           {STATUT_PROPRIETAIRE_LABELS[s]}
