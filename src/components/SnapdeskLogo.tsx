@@ -1,43 +1,36 @@
 "use client";
 
+import Image from "next/image";
+
 interface LogoProps {
   className?: string;
   variant?: "dark" | "light";
   size?: "sm" | "md" | "lg";
 }
 
-export function SnapdeskLogo({ className = "", variant = "dark", size = "md" }: LogoProps) {
-  const textSizes = { sm: "text-xl", md: "text-2xl", lg: "text-4xl" };
-  const chevronSizes = { sm: "text-base", md: "text-lg", lg: "text-3xl" };
+const SIZES = {
+  sm: { width: 120, height: 30 },
+  md: { width: 160, height: 40 },
+  lg: { width: 240, height: 60 },
+};
 
-  const textColor = variant === "dark" ? "#1C1F25" : "#ffffff";
-  const chevronColor = "#A9BCB7";
+export function SnapdeskLogo({ className = "", variant = "dark", size = "md" }: LogoProps) {
+  const { width, height } = SIZES[size];
 
   return (
-    <div className={`flex items-center select-none ${className}`} style={{ gap: 0 }}>
-      <span
+    <div className={`flex items-center ${className}`}>
+      <Image
+        src="/logo.png"
+        alt="Snapdesk"
+        width={width}
+        height={height}
+        priority
         style={{
-          fontFamily: "'DM Sans', sans-serif",
-          fontWeight: 600,
-          color: textColor,
-          letterSpacing: "-0.02em",
-          lineHeight: 1,
+          // Sur fond sombre : logo noir inversé en blanc
+          filter: variant === "light" ? "brightness(0) invert(1)" : "none",
+          objectFit: "contain",
         }}
-        className={textSizes[size]}
-      >
-        snapdesk
-      </span>
-      <span
-        style={{
-          fontFamily: "'DM Sans', sans-serif",
-          fontWeight: 700,
-          color: chevronColor,
-          lineHeight: 1,
-        }}
-        className={chevronSizes[size]}
-      >
-        {"<"}
-      </span>
+      />
     </div>
   );
 }
