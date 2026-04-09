@@ -9,7 +9,7 @@ import { LogOut, Menu, X } from "lucide-react";
 import { useState } from "react";
 
 interface NavbarProps {
-  userRole?: "proprietaire" | "entreprise" | "bizdev" | null;
+  userRole?: "proprietaire" | "bizdev" | null;
   userName?: string;
 }
 

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { SnapdeskLogo } from "@/components/SnapdeskLogo";
-import { Building2, Users, ExternalLink, ArrowRight, CheckCircle2 } from "lucide-react";
+import { Building2, ExternalLink, ArrowRight, CheckCircle2 } from "lucide-react";
 
 export default function HubPage() {
   const portails = [
@@ -40,26 +40,6 @@ export default function HubPage() {
         "Soumission d'espaces",
         "Suivi de projet",
         "Rapports mensuels",
-      ],
-    },
-    {
-      id: "entreprise",
-      icon: Users,
-      title: "Vous cherchez vos bureaux",
-      subtitle: "Trouvez l'espace qui vous correspond",
-      description:
-        "Décrivez vos besoins et laissez nos experts vous proposer une sélection d'espaces adaptés. Gérez votre recherche de A à Z.",
-      cta: "Démarrer ma recherche",
-      href: "/entreprise",
-      external: false,
-      borderColor: "border-[#E590A1]/40 hover:border-[#E590A1]",
-      iconBg: "bg-[#E590A1]",
-      iconColor: "text-white",
-      ctaColor: "text-[#E590A1]",
-      features: [
-        "Cahier des charges",
-        "Sélection d'espaces",
-        "Suivi des négociations",
       ],
     },
   ];
@@ -120,7 +100,7 @@ export default function HubPage() {
         </p>
       </header>
 
-      <main className="max-w-6xl mx-auto px-4 pb-20 grid grid-cols-1 md:grid-cols-3 gap-6">
+      <main className="max-w-4xl mx-auto px-4 pb-20 grid grid-cols-1 md:grid-cols-2 gap-6">
         {portails.map((portail) =>
           portail.external ? (
             <a

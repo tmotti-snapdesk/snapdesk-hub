@@ -5,7 +5,7 @@ import { Providers } from "@/components/Providers";
 export const metadata: Metadata = {
   title: "Snapdesk Hub – Votre espace personnel",
   description:
-    "Portail Snapdesk pour propriétaires d'espaces de bureaux et entreprises en recherche.",
+    "Portail Snapdesk pour propriétaires d'espaces de bureaux.",
 };
 
 export default function RootLayout({
