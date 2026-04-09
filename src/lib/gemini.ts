@@ -2,7 +2,15 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 
 /**
  * Wrapper autour du SDK Google Generative AI.
- * Utilise Gemini 2.0 Flash (modèle gratuit, 15 req/min, 1500 req/jour).
+ *
+ * Modèle par défaut : `gemini-2.5-flash-lite` (gratuit dans le free tier actuel).
+ * Peut être surchargé via la variable d'env `GEMINI_MODEL` sans redéployer du code.
+ *
+ * Modèles alternatifs gratuits si le défaut ne marche pas dans ta région :
+ *   - gemini-2.5-flash-lite   (recommandé, rapide, gratuit)
+ *   - gemini-2.0-flash-lite
+ *   - gemini-1.5-flash        (long-running, stable)
+ *   - gemini-1.5-flash-8b     (le plus léger)
  *
  * Doc : https://ai.google.dev/gemini-api/docs
  */
@@ -10,10 +18,14 @@ function getClient() {
   const apiKey = process.env.GOOGLE_GEMINI_API_KEY;
   if (!apiKey) {
     throw new Error(
-      "GOOGLE_GEMINI_API_KEY manquante. Ajoute-la dans .env.local.",
+      "GOOGLE_GEMINI_API_KEY manquante. Ajoute-la dans .env.local (et sur Vercel).",
     );
   }
   return new GoogleGenerativeAI(apiKey);
+}
+
+function getModelName(): string {
+  return process.env.GEMINI_MODEL || "gemini-2.5-flash-lite";
 }
 
 /**
@@ -51,11 +63,15 @@ export type VisitContext = {
 /**
  * Appelle Gemini pour transformer des notes brutes en compte-rendu formaté.
  * Retourne le markdown brut (prêt à stocker dans Visit.formattedReport).
+ *
+ * En cas de quota dépassé, renvoie une erreur claire avec les instructions
+ * pour changer de modèle via la variable d'env GEMINI_MODEL.
  */
 export async function formatVisitReport(ctx: VisitContext): Promise<string> {
   const client = getClient();
+  const modelName = getModelName();
   const model = client.getGenerativeModel({
-    model: "gemini-2.0-flash",
+    model: modelName,
     systemInstruction: VISIT_REPORT_SYSTEM_PROMPT,
   });
 
@@ -73,12 +89,25 @@ export async function formatVisitReport(ctx: VisitContext): Promise<string> {
 ${ctx.rawNotes}
 `.trim();
 
-  const result = await model.generateContent(userMessage);
-  const text = result.response.text();
+  try {
+    const result = await model.generateContent(userMessage);
+    const text = result.response.text();
 
-  if (!text || text.trim().length === 0) {
-    throw new Error("La reformulation a renvoyé un texte vide.");
+    if (!text || text.trim().length === 0) {
+      throw new Error("La reformulation a renvoyé un texte vide.");
+    }
+
+    return text.trim();
+  } catch (err) {
+    // Erreur de quota → message explicite pour l'utilisateur final
+    const message = err instanceof Error ? err.message : String(err);
+    if (message.includes("429") || message.toLowerCase().includes("quota")) {
+      throw new Error(
+        `Quota Gemini dépassé sur le modèle "${modelName}". ` +
+          `Essaie un autre modèle gratuit en définissant la variable d'env ` +
+          `GEMINI_MODEL (ex. gemini-1.5-flash ou gemini-1.5-flash-8b).`,
+      );
+    }
+    throw err;
   }
-
-  return text.trim();
 }
