@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { Providers } from "@/components/Providers";
 
 export const metadata: Metadata = {
   title: "Snapdesk Hub – Votre espace personnel",
@@ -15,7 +16,7 @@ export default function RootLayout({
   return (
     <html lang="fr">
       <body className="font-sans antialiased bg-slate-50">
-        {children}
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

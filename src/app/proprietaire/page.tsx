@@ -1,14 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import Link from "next/link";
+import { useSession } from "next-auth/react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
   MOCK_ESPACES_PROPRIETAIRE,
   STATUT_PROPRIETAIRE_LABELS,
-  type User,
   type EspaceProprietaire,
 } from "@/lib/mock-data";
 import { Building2, Plus, TrendingUp, FileText, Eye, ArrowRight } from "lucide-react";
@@ -23,13 +21,9 @@ const STATUT_COLORS: Record<string, string> = {
 };
 
 export default function ProprietaireDashboard() {
-  const [user, setUser] = useState<User | null>(null);
+  const { data: session } = useSession();
+  const user = session?.user;
   const espaces: EspaceProprietaire[] = MOCK_ESPACES_PROPRIETAIRE;
-
-  useEffect(() => {
-    const raw = sessionStorage.getItem("snapdesk_user");
-    if (raw) setUser(JSON.parse(raw));
-  }, []);
 
   const stats = [
     {

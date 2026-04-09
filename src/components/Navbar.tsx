@@ -1,20 +1,20 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
+import { signOut } from "next-auth/react";
 import { SnapdeskLogo } from "./SnapdeskLogo";
 import { Button } from "@/components/ui/button";
 import { LogOut, Menu, X } from "lucide-react";
 import { useState } from "react";
 
 interface NavbarProps {
-  userRole?: "proprietaire" | "entreprise" | null;
+  userRole?: "proprietaire" | "entreprise" | "bizdev" | null;
   userName?: string;
 }
 
 export function Navbar({ userRole, userName }: NavbarProps) {
   const pathname = usePathname();
-  const router = useRouter();
   const [menuOpen, setMenuOpen] = useState(false);
 
   const proprietaireLinks = [
@@ -24,25 +24,21 @@ export function Navbar({ userRole, userName }: NavbarProps) {
     { href: "/proprietaire/projets", label: "Mes projets" },
   ];
 
-  const entrepriseLinks = [
-    { href: "/entreprise", label: "Tableau de bord" },
-    { href: "/entreprise/cahier-des-charges", label: "Mes besoins" },
-    { href: "/entreprise/espaces", label: "Espaces proposés" },
-    { href: "/entreprise/projets", label: "Mes projets" },
+  const bizdevLinks = [
+    { href: "/bizdev", label: "Tableau de bord" },
+    { href: "/bizdev/espaces", label: "Espaces" },
+    { href: "/bizdev/visites", label: "Visites" },
   ];
 
   const links =
     userRole === "proprietaire"
       ? proprietaireLinks
-      : userRole === "entreprise"
-      ? entrepriseLinks
+      : userRole === "bizdev"
+      ? bizdevLinks
       : [];
 
   const handleLogout = () => {
-    if (typeof window !== "undefined") {
-      sessionStorage.removeItem("snapdesk_user");
-    }
-    router.push("/");
+    void signOut({ redirectTo: "/" });
   };
 
   return (
