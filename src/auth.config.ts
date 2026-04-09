@@ -20,6 +20,7 @@ export const authConfig = {
 
       const isOwnerPath = nextUrl.pathname.startsWith("/proprietaire");
       const isBizdevPath = nextUrl.pathname.startsWith("/bizdev");
+      const isAdminPath = nextUrl.pathname.startsWith("/admin");
       const isAuthPage =
         nextUrl.pathname.startsWith("/signin") ||
         nextUrl.pathname.startsWith("/signup");
@@ -32,6 +33,9 @@ export const authConfig = {
         if (role === "BIZDEV") {
           return Response.redirect(new URL("/bizdev", nextUrl));
         }
+        if (role === "ADMIN") {
+          return Response.redirect(new URL("/admin", nextUrl));
+        }
       }
 
       // Routes propriétaire → réservées au rôle OWNER
@@ -43,10 +47,19 @@ export const authConfig = {
         return true;
       }
 
-      // Routes bizdev → réservées au rôle BIZDEV
+      // Routes bizdev → BIZDEV et ADMIN
       if (isBizdevPath) {
         if (!isLoggedIn) return false;
-        if (role !== "BIZDEV") {
+        if (role !== "BIZDEV" && role !== "ADMIN") {
+          return Response.redirect(new URL("/signin", nextUrl));
+        }
+        return true;
+      }
+
+      // Routes admin → ADMIN uniquement
+      if (isAdminPath) {
+        if (!isLoggedIn) return false;
+        if (role !== "ADMIN") {
           return Response.redirect(new URL("/signin", nextUrl));
         }
         return true;

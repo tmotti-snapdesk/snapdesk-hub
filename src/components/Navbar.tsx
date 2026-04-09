@@ -9,7 +9,7 @@ import { LogOut, Menu, X } from "lucide-react";
 import { useState } from "react";
 
 interface NavbarProps {
-  userRole?: "proprietaire" | "bizdev" | null;
+  userRole?: "proprietaire" | "bizdev" | "admin" | null;
   userName?: string;
 }
 
@@ -26,8 +26,14 @@ export function Navbar({ userRole, userName }: NavbarProps) {
 
   const bizdevLinks = [
     { href: "/bizdev", label: "Tableau de bord" },
-    { href: "/bizdev/espaces", label: "Espaces" },
-    { href: "/bizdev/visites", label: "Visites" },
+    { href: "/bizdev/imports", label: "Imports Sheet" },
+  ];
+
+  const adminLinks = [
+    { href: "/admin", label: "Tableau de bord" },
+    { href: "/admin/proprietaires", label: "Propriétaires" },
+    { href: "/bizdev", label: "Espaces & visites" },
+    { href: "/bizdev/imports", label: "Imports Sheet" },
   ];
 
   const links =
@@ -35,6 +41,8 @@ export function Navbar({ userRole, userName }: NavbarProps) {
       ? proprietaireLinks
       : userRole === "bizdev"
       ? bizdevLinks
+      : userRole === "admin"
+      ? adminLinks
       : [];
 
   const handleLogout = () => {

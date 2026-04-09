@@ -37,6 +37,7 @@ model User {
   marketingSpends             MarketingInvestment[]     @relation("SpendCreatedBy")
   reportsCreated              CommercializationReport[] @relation("ReportCreatedBy")
   profitabilityStudiesCreated ProfitabilityStudy[]      @relation("StudyCreatedBy")
+  sheetImportsCreated         SheetVisitImport[]        @relation("SheetImportCreatedBy")
   notifications               Notification[]
 }
 
@@ -156,6 +157,9 @@ model Visit {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
+  // Lien vers l'import Sheet d'origine (si la visite a été créée via l'import)
+  fromImport SheetVisitImport? @relation("ImportConvertedVisit")
+
   @@index([spaceId, visitDate])
   @@index([status])
 }
@@ -248,4 +252,50 @@ model Notification {
   createdAt   DateTime  @default(now())
 
   @@index([userId, readAt])
+}
+
+// ========================================================================
+// IMPORTS DEPUIS GOOGLE SHEET
+// Zone de staging : une ligne du Sheet -> un SheetVisitImport en
+// PENDING_REVIEW. Le BizDev la relie à un Space via l'UI, ce qui
+// convertit l'import en une vraie Visit.
+// ========================================================================
+
+enum ImportStatus {
+  PENDING_REVIEW // Reçu du Sheet, attend un BizDev pour l'assigner à un espace
+  CONVERTED // Converti en vraie Visit
+  DISCARDED // Rejeté par un BizDev (doublon, erreur...)
+}
+
+model SheetVisitImport {
+  id     String       @id @default(cuid())
+  status ImportStatus @default(PENDING_REVIEW)
+
+  // Contexte de la ligne Sheet
+  visitDate           DateTime
+  sheetSpaceName      String // "Bergère R+2"
+  sheetArrondissement String?
+  sheetClient         String? // "Upflow"
+  sheetSalesCode      String // "MV"
+  sheetBroker         String? // "Direct SD"
+  sheetVisitType      String? // "1ère visite"
+  sheetRowNumber      Int? // n° de ligne dans le Sheet (debug)
+
+  // Contenu
+  rawNotes        String // Col L "Feedbacks"
+  formattedReport String? // sortie Gemini
+
+  // BizDev qui a saisi dans le Sheet (mappé depuis sheetSalesCode)
+  createdById String?
+  createdBy   User?   @relation("SheetImportCreatedBy", fields: [createdById], references: [id])
+
+  // Lien vers la Visit créée quand le BizDev valide l'import
+  convertedVisitId String?   @unique
+  convertedVisit   Visit?    @relation("ImportConvertedVisit", fields: [convertedVisitId], references: [id])
+  convertedAt      DateTime?
+
+  importedAt DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([status, importedAt])
 }

@@ -3,27 +3,23 @@ import { auth } from "@/auth";
 import { Navbar } from "@/components/Navbar";
 
 /**
- * Layout BizDev — accessible aux rôles BIZDEV et ADMIN.
- * La garde est faite côté proxy, mais on double-check ici.
+ * Layout admin — réservé au rôle ADMIN.
+ * Permet de gérer les propriétaires et leurs espaces sans passer par
+ * le flow d'auto-inscription.
  */
-export default async function BizdevLayout({
+export default async function AdminLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   const session = await auth();
-  if (
-    !session?.user ||
-    (session.user.role !== "BIZDEV" && session.user.role !== "ADMIN")
-  ) {
+  if (!session?.user || session.user.role !== "ADMIN") {
     redirect("/signin");
   }
 
-  const navRole = session.user.role === "ADMIN" ? "admin" : "bizdev";
-
   return (
     <div className="min-h-screen bg-slate-50">
-      <Navbar userRole={navRole} userName={session.user.name ?? undefined} />
+      <Navbar userRole="admin" userName={session.user.name ?? undefined} />
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {children}
       </main>
