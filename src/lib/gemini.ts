@@ -1,4 +1,8 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
+import {
+  anonymizeClientName,
+  redactClientNameInText,
+} from "./client-anonymize";
 
 /**
  * Wrapper autour du SDK Google Generative AI.
@@ -49,7 +53,8 @@ RÈGLES STRICTES :
 5. Longueur cible : 150 à 300 mots.
 6. N'invente pas de nom de personne, de date ou de chiffre. Si une info manque, ne la mentionne pas.
 7. Écris en français. Utilise le vouvoiement implicite (pas de "tu").
-8. Renvoie UNIQUEMENT le Markdown du compte-rendu, sans introduction ni conclusion de ta part.`;
+8. ANONYMAT DU PROSPECT : ne mentionne JAMAIS le nom de l'entreprise prospect dans le texte. Utilise exclusivement les formules "le prospect", "l'entreprise", "l'équipe visiteuse". Si un nom commençant par une majuscule ressemble à un nom d'entreprise dans les notes, remplace-le par "le prospect". N'utilise jamais non plus le nom du contact prospect.
+9. Renvoie UNIQUEMENT le Markdown du compte-rendu, sans introduction ni conclusion de ta part.`;
 
 export type VisitContext = {
   visitDate: Date;
@@ -75,18 +80,27 @@ export async function formatVisitReport(ctx: VisitContext): Promise<string> {
     systemInstruction: VISIT_REPORT_SYSTEM_PROMPT,
   });
 
+  // Pré-anonymisation : on remplace le nom du prospect dans les notes brutes
+  // AVANT de les envoyer à Gemini. Double protection (notes anonymisées +
+  // instruction du prompt) pour que le nom réel ne puisse jamais ressortir
+  // dans le compte-rendu visible par le propriétaire.
+  const anonymizedCompany = anonymizeClientName(ctx.prospectCompany);
+  const redactedRawNotes = ctx.prospectCompany
+    ? redactClientNameInText(ctx.rawNotes, ctx.prospectCompany)
+    : ctx.rawNotes;
+
   const userMessage = `
 # Informations de la visite
 
 - **Espace visité :** ${ctx.spaceName}
 - **Date de la visite :** ${ctx.visitDate.toLocaleDateString("fr-FR", { weekday: "long", year: "numeric", month: "long", day: "numeric" })}
-- **Entreprise prospect :** ${ctx.prospectCompany || "Non renseignée"}
-- **Contact prospect :** ${ctx.prospectContact || "Non renseigné"}
+- **Entreprise prospect :** ${anonymizedCompany || "Non renseignée"} (anonymisé, ne jamais révéler le vrai nom)
 - **Participants Snapdesk :** ${ctx.attendees || "Non renseignés"}
 
 # Notes brutes à reformuler
+# (Le nom du prospect a été anonymisé. Ne tente pas de le deviner ni de le reconstituer.)
 
-${ctx.rawNotes}
+${redactedRawNotes}
 `.trim();
 
   try {

@@ -8,6 +8,7 @@ import { auth } from "@/auth";
 import { formatVisitReport } from "@/lib/gemini";
 import { sendEmail } from "@/lib/resend";
 import { renderVisitReportEmail } from "@/lib/emails/visit-report";
+import { anonymizeClientName } from "@/lib/client-anonymize";
 
 // ============================================================================
 // Helpers
@@ -303,7 +304,12 @@ export async function publishVisitReportAction(
       ownerFirstName: firstName,
       spaceName: visit.space.name,
       visitDate: visit.visitDate,
-      prospectCompany: visit.prospectCompany,
+      // Anonymisation côté propriétaire : le nom réel du prospect ne doit
+      // jamais apparaître dans l'email, pour éviter que le propriétaire
+      // bypass Snapdesk en le contactant en direct.
+      prospectCompany: visit.prospectCompany
+        ? anonymizeClientName(visit.prospectCompany)
+        : null,
       reportUrl,
     });
     await sendEmail({

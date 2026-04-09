@@ -11,6 +11,7 @@ import {
   SPACE_STATUS_COLORS,
   SPACE_STATUS_ORDER,
 } from "@/lib/space-status";
+import { anonymizeClientName } from "@/lib/client-anonymize";
 
 import {
   Building2,
@@ -235,7 +236,7 @@ export default async function ProjetDetailPage({
                     </span>
                     {visit.prospectCompany && (
                       <span className="text-xs font-normal text-slate-500">
-                        {visit.prospectCompany}
+                        Prospect {anonymizeClientName(visit.prospectCompany)}
                       </span>
                     )}
                   </CardTitle>

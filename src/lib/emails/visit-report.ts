@@ -67,7 +67,7 @@ export function renderVisitReportEmail(input: VisitReportEmailInput) {
                     </p>
                     ${
                       prospectCompany
-                        ? `<p style="margin:0;color:#1C1F25;font-size:15px;"><strong>Prospect :</strong> ${escapeHtml(prospectCompany)}</p>`
+                        ? `<p style="margin:0;color:#1C1F25;font-size:15px;"><strong>Prospect :</strong> ${escapeHtml(prospectCompany)}<span style="color:#94a3b8;font-size:12px;"> (anonymisé)</span></p>`
                         : ""
                     }
                   </td>

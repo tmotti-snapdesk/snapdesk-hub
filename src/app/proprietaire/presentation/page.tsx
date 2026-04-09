@@ -6,7 +6,6 @@ import Link from "next/link";
 import {
   Building2,
   TrendingUp,
-  Shield,
   Users,
   BarChart3,
   Wrench,
@@ -14,31 +13,32 @@ import {
   ArrowRight,
   CheckCircle2,
   Euro,
+  Handshake,
 } from "lucide-react";
 
 const etapes = [
   {
     num: "01",
-    title: "Soumission & analyse",
-    desc: "Vous renseignez les caractéristiques de votre espace. Notre équipe sourcing étudie le potentiel et vous contacte sous 48h.",
+    title: "Soumission & premier contact",
+    desc: "Vous renseignez les caractéristiques de votre espace. Notre équipe sourcing étudie votre dossier et vous contacte sous 48 heures.",
     icon: Building2,
   },
   {
     num: "02",
-    title: "Visite & validation",
-    desc: "Nos équipes visitent l'espace, évaluent les travaux d'aménagement nécessaires et établissent une proposition commerciale.",
+    title: "Étude de rentabilité gratuite",
+    desc: "Nos équipes visitent l'espace et réalisent gratuitement une étude de rentabilité complète, avec recommandations d'aménagement et proposition commerciale chiffrée.",
     icon: Star,
   },
   {
     num: "03",
     title: "Signature & aménagement",
-    desc: "Un contrat de gestion est signé. Snapdesk pilote les travaux d'aménagement selon nos standards premium.",
-    icon: Shield,
+    desc: "Un contrat de gestion est signé. Snapdesk conçoit et pilote les travaux d'aménagement selon nos standards premium.",
+    icon: Handshake,
   },
   {
     num: "04",
-    title: "Commercialisation",
-    desc: "Snapdesk commercialise votre espace auprès de son réseau d'entreprises. Vous recevez des rapports mensuels détaillés.",
+    title: "Commercialisation active",
+    desc: "Snapdesk commercialise votre espace auprès de son réseau de 400 brokers partenaires et directement auprès des entreprises. Vous êtes informé à chaque visite et recevez des rapports mensuels détaillés.",
     icon: TrendingUp,
   },
 ];
@@ -60,11 +60,6 @@ const avantages = [
     desc: "Rapports mensuels détaillés : visites, taux d'occupation, revenus générés, feedback clients.",
   },
   {
-    icon: Shield,
-    title: "Contrat sécurisé",
-    desc: "Bail commercial ferme avec engagement pluriannuel. Vos intérêts sont protégés contractuellement.",
-  },
-  {
     icon: Users,
     title: "Réseau qualifié",
     desc: "Accès à notre portefeuille d'entreprises en croissance, sélectionnées pour leur solidité financière.",
@@ -77,10 +72,10 @@ const avantages = [
 ];
 
 const chiffres = [
-  { value: "150+", label: "Espaces gérés" },
-  { value: "94%", label: "Taux d'occupation moyen" },
-  { value: "48h", label: "Délai de réponse" },
-  { value: "3 ans", label: "Durée moyenne des baux" },
+  { value: "16 500 m²", label: "de bureaux opérés" },
+  { value: "2 000", label: "utilisateurs finaux" },
+  { value: "48h", label: "délai de réponse" },
+  { value: "+15 %", label: "de rentabilité vs bail commercial" },
 ];
 
 export default function PresentationPage() {
@@ -93,7 +88,8 @@ export default function PresentationPage() {
         </h1>
         <p className="text-slate-600 text-lg max-w-3xl mx-auto leading-relaxed">
           Snapdesk transforme vos espaces vides en bureaux premium gérés de A à Z.
-          Vous bénéficiez d'un revenu locatif stable et garanti, sans aucune contrainte de gestion.
+          Vous bénéficiez d&apos;un revenu locatif stable et garanti, sans aucune
+          contrainte de gestion.
         </p>
       </div>
 
@@ -118,7 +114,10 @@ export default function PresentationPage() {
           {etapes.map((etape) => {
             const Icon = etape.icon;
             return (
-              <Card key={etape.num} className="border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
+              <Card
+                key={etape.num}
+                className="border border-slate-100 shadow-sm hover:shadow-md transition-shadow"
+              >
                 <CardContent className="p-6 flex gap-4">
                   <div className="flex-shrink-0">
                     <div className="w-12 h-12 bg-[#1C1F25] rounded-xl flex items-center justify-center">
@@ -129,8 +128,12 @@ export default function PresentationPage() {
                     <span className="text-xs font-bold text-[#2563eb] tracking-widest">
                       ÉTAPE {etape.num}
                     </span>
-                    <h3 className="font-bold text-[#1C1F25] mt-0.5 mb-2">{etape.title}</h3>
-                    <p className="text-sm text-slate-600 leading-relaxed">{etape.desc}</p>
+                    <h3 className="font-bold text-[#1C1F25] mt-0.5 mb-2">
+                      {etape.title}
+                    </h3>
+                    <p className="text-sm text-slate-600 leading-relaxed">
+                      {etape.desc}
+                    </p>
                   </div>
                 </CardContent>
               </Card>
@@ -154,7 +157,9 @@ export default function PresentationPage() {
                     <Icon className="w-5 h-5 text-[#1C1F25]" />
                   </div>
                   <h3 className="font-semibold text-[#1C1F25] mb-1">{av.title}</h3>
-                  <p className="text-sm text-slate-600 leading-relaxed">{av.desc}</p>
+                  <p className="text-sm text-slate-600 leading-relaxed">
+                    {av.desc}
+                  </p>
                 </CardContent>
               </Card>
             );
@@ -170,16 +175,18 @@ export default function PresentationPage() {
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             {[
-              "Conception et travaux d'aménagement",
+              "Conception et pilotage des travaux d'aménagement",
               "Mobilier et équipements",
               "Commercialisation et recherche de locataires",
               "Gestion des entrées et sorties",
               "Maintenance et entretien courant",
-              "Assurances et gestion des sinistres",
               "Facturation et recouvrement",
               "Reporting mensuel détaillé",
             ].map((item) => (
-              <div key={item} className="flex items-center gap-2 text-sm text-slate-700">
+              <div
+                key={item}
+                className="flex items-center gap-2 text-sm text-slate-700"
+              >
                 <CheckCircle2 className="w-4 h-4 text-green-500 flex-shrink-0" />
                 {item}
               </div>
