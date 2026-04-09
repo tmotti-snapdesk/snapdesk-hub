@@ -1,0 +1,251 @@
+// Snapdesk Hub — Prisma schema
+// Doc: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+// ========================================================================
+// UTILISATEURS
+// ========================================================================
+
+enum UserRole {
+  OWNER // Propriétaire d'espace
+  BIZDEV // Commercial Snapdesk
+  ADMIN // Admin plateforme
+}
+
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String
+  name         String
+  role         UserRole @default(OWNER)
+  company      String?
+  phone        String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  spaces                      Space[]                   @relation("OwnerSpaces")
+  visitsCreated               Visit[]                   @relation("VisitCreatedBy")
+  marketingSpends             MarketingInvestment[]     @relation("SpendCreatedBy")
+  reportsCreated              CommercializationReport[] @relation("ReportCreatedBy")
+  profitabilityStudiesCreated ProfitabilityStudy[]      @relation("StudyCreatedBy")
+  notifications               Notification[]
+}
+
+// ========================================================================
+// ESPACES
+// ========================================================================
+
+enum SpaceStatus {
+  RECEIVED // Soumis, en attente d'étude
+  STUDY_IN_PROGRESS // Étude de rentabilité en cours
+  STUDY_DELIVERED // Étude remise au propriétaire
+  MARKETING // En commercialisation active
+  IN_DISCUSSION // Négociation en cours avec un prospect
+  CONTRACT_SIGNED // Contrat signé
+  ARCHIVED
+}
+
+model Space {
+  id      String @id @default(cuid())
+  ownerId String
+  owner   User   @relation("OwnerSpaces", fields: [ownerId], references: [id], onDelete: Cascade)
+
+  // Localisation
+  name       String
+  address    String
+  postalCode String
+  city       String
+  floor      String?
+
+  // Caractéristiques
+  area      Int // m²
+  capacity  Int // postes
+  spaceType String
+  amenities String[] // tableau Postgres
+
+  // Financier (centimes, pour éviter les flottants)
+  monthlyRent      Int
+  monthlyCharges   Int?
+  availabilityDate DateTime
+
+  // Description
+  description   String
+  worksStatus   String?
+  internalNotes String? // notes Snapdesk visibles côté propriétaire
+
+  status    SpaceStatus @default(RECEIVED)
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+
+  photos                   SpacePhoto[]
+  profitabilityStudy       ProfitabilityStudy?
+  visits                   Visit[]
+  marketingInvestments     MarketingInvestment[]
+  commercializationReports CommercializationReport[]
+
+  @@index([ownerId])
+  @@index([status])
+}
+
+model SpacePhoto {
+  id        String   @id @default(cuid())
+  spaceId   String
+  space     Space    @relation(fields: [spaceId], references: [id], onDelete: Cascade)
+  url       String
+  caption   String?
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+
+  @@index([spaceId])
+}
+
+// ========================================================================
+// ÉTUDE DE RENTABILITÉ
+// Livrable remis au propriétaire après soumission d'un espace
+// ========================================================================
+
+model ProfitabilityStudy {
+  id          String   @id @default(cuid())
+  spaceId     String   @unique
+  space       Space    @relation(fields: [spaceId], references: [id], onDelete: Cascade)
+  summary     String
+  fileUrl     String? // PDF optionnel (Supabase Storage)
+  createdById String
+  createdBy   User     @relation("StudyCreatedBy", fields: [createdById], references: [id])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// ========================================================================
+// VISITES & COMPTES-RENDUS
+// ========================================================================
+
+enum VisitReportStatus {
+  DRAFT // BizDev a saisi les notes brutes, LLM pas encore appelé
+  FORMATTED // LLM a reformulé, en attente de relecture / publication
+  PUBLISHED // Visible par le propriétaire
+}
+
+model Visit {
+  id      String @id @default(cuid())
+  spaceId String
+  space   Space  @relation(fields: [spaceId], references: [id], onDelete: Cascade)
+
+  visitDate       DateTime
+  prospectCompany String?
+  prospectContact String?
+  attendees       String? // participants côté Snapdesk
+
+  rawNotes        String // brouillon du BizDev (input LLM)
+  formattedReport String? // sortie Gemini (visible propriétaire)
+
+  status      VisitReportStatus @default(DRAFT)
+  publishedAt DateTime?
+
+  createdById String
+  createdBy   User     @relation("VisitCreatedBy", fields: [createdById], references: [id])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([spaceId, visitDate])
+  @@index([status])
+}
+
+// ========================================================================
+// INVESTISSEMENTS MARKETING
+// Alimentent automatiquement les rapports mensuels
+// ========================================================================
+
+model MarketingInvestment {
+  id      String @id @default(cuid())
+  spaceId String
+  space   Space  @relation(fields: [spaceId], references: [id], onDelete: Cascade)
+
+  amount      Int // centimes
+  channel     String // "LinkedIn Ads", "Google Ads", "Salon immo"...
+  description String?
+  spentAt     DateTime
+
+  createdById String
+  createdBy   User     @relation("SpendCreatedBy", fields: [createdById], references: [id])
+  createdAt   DateTime @default(now())
+
+  @@index([spaceId, spentAt])
+}
+
+// ========================================================================
+// RAPPORTS DE COMMERCIALISATION (mensuels)
+// ========================================================================
+
+enum CommercializationReportStatus {
+  DRAFT
+  PUBLISHED
+}
+
+model CommercializationReport {
+  id      String @id @default(cuid())
+  spaceId String
+  space   Space  @relation(fields: [spaceId], references: [id], onDelete: Cascade)
+
+  // Mois concerné (stocké comme premier jour du mois : 2025-04-01)
+  month DateTime
+
+  // KPIs auto-calculés à la génération
+  visitsCount    Int  @default(0)
+  inquiriesCount Int  @default(0)
+  marketingSpend Int  @default(0) // centimes
+  occupancyRate  Int? // %, saisi par le BizDev
+
+  // Saisie manuelle BizDev
+  bizdevComment String?
+
+  status      CommercializationReportStatus @default(DRAFT)
+  publishedAt DateTime?
+
+  createdById String
+  createdBy   User     @relation("ReportCreatedBy", fields: [createdById], references: [id])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@unique([spaceId, month]) // 1 seul rapport par mois par espace
+  @@index([spaceId])
+}
+
+// ========================================================================
+// NOTIFICATIONS
+// ========================================================================
+
+enum NotificationType {
+  VISIT_REPORT_PUBLISHED
+  MONTHLY_REPORT_PUBLISHED
+  PROFITABILITY_STUDY_READY
+  STATUS_CHANGED
+}
+
+model Notification {
+  id     String @id @default(cuid())
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  type              NotificationType
+  title             String
+  body              String
+  relatedEntityType String? // "Visit" | "CommercializationReport" | ...
+  relatedEntityId   String?
+
+  emailSent   Boolean   @default(false)
+  emailSentAt DateTime?
+  readAt      DateTime?
+  createdAt   DateTime  @default(now())
+
+  @@index([userId, readAt])
+}
