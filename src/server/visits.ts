@@ -7,7 +7,10 @@ import { prisma } from "@/lib/prisma";
 import { auth } from "@/auth";
 import { formatVisitReport } from "@/lib/gemini";
 import { sendEmail } from "@/lib/resend";
-import { renderVisitReportEmail } from "@/lib/emails/visit-report";
+import {
+  renderVisitReportEmail,
+  extractSectionText,
+} from "@/lib/emails/visit-report";
 import { anonymizeClientName } from "@/lib/client-anonymize";
 
 // ============================================================================
@@ -300,17 +303,24 @@ export async function publishVisitReportAction(
   try {
     const baseUrl = process.env.NEXTAUTH_URL || "http://localhost:3000";
     const reportUrl = `${baseUrl}/proprietaire/projets/${visit.space.id}`;
+    // Extraire les sections condensées du CR pour l'email
+    const formattedReport = visit.formattedReport ?? "";
+    const summaryEnBref = extractSectionText(formattedReport, "En bref");
+    const summaryProchainesEtapes = extractSectionText(
+      formattedReport,
+      "Prochaines étapes",
+    );
+
     const email = renderVisitReportEmail({
       ownerFirstName: firstName,
       spaceName: visit.space.name,
       visitDate: visit.visitDate,
-      // Anonymisation côté propriétaire : le nom réel du prospect ne doit
-      // jamais apparaître dans l'email, pour éviter que le propriétaire
-      // bypass Snapdesk en le contactant en direct.
       prospectCompany: visit.prospectCompany
         ? anonymizeClientName(visit.prospectCompany)
         : null,
       reportUrl,
+      summaryEnBref,
+      summaryProchainesEtapes,
     });
     await sendEmail({
       to: owner.email,

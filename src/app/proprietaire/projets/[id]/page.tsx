@@ -3,6 +3,7 @@ import { redirect, notFound } from "next/navigation";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { StatusTimeline } from "@/components/StatusTimeline";
+import { VisitReportRenderer } from "@/components/VisitReportRenderer";
 
 import { auth } from "@/auth";
 import { getSpaceByIdForOwner } from "@/server/spaces";
@@ -232,7 +233,11 @@ export default async function ProjetDetailPage({
                   <CardTitle className="text-base font-semibold text-[#1C1F25] flex items-center justify-between">
                     <span>
                       Visite du{" "}
-                      {new Date(visit.visitDate).toLocaleDateString("fr-FR")}
+                      {new Date(visit.visitDate).toLocaleDateString("fr-FR", {
+                        day: "numeric",
+                        month: "long",
+                        year: "numeric",
+                      })}
                     </span>
                     {visit.prospectCompany && (
                       <span className="text-xs font-normal text-slate-500">
@@ -242,9 +247,13 @@ export default async function ProjetDetailPage({
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-sm text-slate-700 leading-relaxed whitespace-pre-wrap">
-                    {visit.formattedReport}
-                  </p>
+                  {visit.formattedReport ? (
+                    <VisitReportRenderer markdown={visit.formattedReport} />
+                  ) : (
+                    <p className="text-sm text-slate-400 italic">
+                      Compte-rendu en cours de rédaction.
+                    </p>
+                  )}
                 </CardContent>
               </Card>
             ))}

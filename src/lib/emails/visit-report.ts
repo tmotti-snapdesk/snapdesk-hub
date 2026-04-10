@@ -3,17 +3,50 @@
  * HTML inline CSS (seul format fiable dans les clients mail).
  */
 
+/**
+ * Extrait une section markdown par son heading (ex: "En bref") et retourne
+ * son contenu texte brut (sans le heading). Retourne null si la section
+ * n'existe pas dans le markdown.
+ */
+export function extractSectionText(
+  markdown: string,
+  sectionName: string,
+): string | null {
+  const regex = new RegExp(
+    `^##\\s+${sectionName.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\s*\\n([\\s\\S]*?)(?=^##\\s|$)`,
+    "mi",
+  );
+  const match = markdown.match(regex);
+  if (!match) return null;
+  const content = match[1]
+    .trim()
+    .replace(/\*\*/g, "") // strip markdown bold
+    .replace(/^[-•]\s+/gm, "• "); // normalize list bullets
+  return content || null;
+}
+
 export type VisitReportEmailInput = {
   ownerFirstName: string;
   spaceName: string;
   visitDate: Date;
   prospectCompany?: string | null;
   reportUrl: string; // URL absolue vers /proprietaire/projets/[id]
+  /** Résumé "En bref" extrait du CR (1-2 phrases) */
+  summaryEnBref?: string | null;
+  /** Section "Prochaines étapes" extraite du CR */
+  summaryProchainesEtapes?: string | null;
 };
 
 export function renderVisitReportEmail(input: VisitReportEmailInput) {
-  const { ownerFirstName, spaceName, visitDate, prospectCompany, reportUrl } =
-    input;
+  const {
+    ownerFirstName,
+    spaceName,
+    visitDate,
+    prospectCompany,
+    reportUrl,
+    summaryEnBref,
+    summaryProchainesEtapes,
+  } = input;
 
   const dateStr = visitDate.toLocaleDateString("fr-FR", {
     day: "numeric",
@@ -73,6 +106,34 @@ export function renderVisitReportEmail(input: VisitReportEmailInput) {
                   </td>
                 </tr>
               </table>
+
+              ${
+                summaryEnBref
+                  ? `<!-- En bref -->
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#f8fafc;border-radius:12px;margin:0 0 16px 0;border-left:4px solid #64748b;">
+                <tr>
+                  <td style="padding:16px 20px;">
+                    <p style="margin:0 0 4px 0;color:#475569;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;">En bref</p>
+                    <p style="margin:0;color:#1C1F25;font-size:14px;line-height:1.5;">${escapeHtml(summaryEnBref)}</p>
+                  </td>
+                </tr>
+              </table>`
+                  : ""
+              }
+
+              ${
+                summaryProchainesEtapes
+                  ? `<!-- Prochaines étapes -->
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#faf5ff;border-radius:12px;margin:0 0 24px 0;border-left:4px solid #9333ea;">
+                <tr>
+                  <td style="padding:16px 20px;">
+                    <p style="margin:0 0 4px 0;color:#7e22ce;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;">Prochaines étapes</p>
+                    <p style="margin:0;color:#1C1F25;font-size:14px;line-height:1.5;">${escapeHtml(summaryProchainesEtapes)}</p>
+                  </td>
+                </tr>
+              </table>`
+                  : ""
+              }
 
               <!-- CTA button -->
               <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
